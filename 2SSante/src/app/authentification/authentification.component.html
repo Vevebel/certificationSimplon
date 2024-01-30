@@ -1,0 +1,87 @@
+<app-header></app-header>
+<div class="container texte-center">
+  <h3>Inscription</h3>
+  <div class="card mb-5 " >
+    <div class=" row ">
+      <div class="col-md-4">
+        <img src="../../../assets/inscription.png" class="img-fluid " alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body emplacement">
+          <div>
+            <h2>Inscription</h2>
+            <form (ngSubmit)="inscription()">
+              <label>Nom:</label>
+              <input type="text" [(ngModel)]="nom" name="nom" required><br>
+
+              <label>Email:</label>
+              <input type="email" [(ngModel)]="email" name="email" required><br>
+
+              <label>Mot de passe:</label>
+              <input type="password" [(ngModel)]="password" name="password" required><br>
+
+              <label>Téléphone:</label>
+              <input type="tel" [(ngModel)]="telephone" name="telephone" required><br>
+
+              <label>Genre:</label>
+              <select [(ngModel)]="genre" name="genre" required>
+                <option value="homme">Homme</option>
+                <option value="femme">Femme</option>
+              </select><br>
+              <label>Ville:</label>
+              <select [(ngModel)]="ville" name="ville" required>
+                <option *ngFor="let v of villes" [value]="v.id">{{ v.nom }}</option>
+              </select><br>
+
+              <!-- Champs spécifiques pour le rôle du médecin -->
+              <div *ngIf="role_id === 2">
+                <!-- <label>Ville:</label>
+                <input type="text" [(ngModel)]="ville" name="ville" required><br>
+                 -->
+                 <!-- Champs pour la ville -->
+
+                <!-- Champs pour le secteur spécialiste -->
+                  <label>Secteur Spécialiste:</label>
+                  <select [(ngModel)]="secteursSpecialistes" name="secteurSpecialiste" required>
+                    <option *ngFor="let s of secteursSpecialistes" [value]="s.id">{{ s.nom }}</option>
+                  </select><br>
+
+                <!-- <label>Secteur d'activité:</label>
+                <input type="text" [(ngModel)]="secteur_activite" name="secteur_activite" required><br> -->
+                <!-- <div class="mb-3"> -->
+                  <!-- <label for="reseau" class="form-label">Réseau: <span class="require"></span> </label>
+                  <select id="reseau" class="form-select" name="reseau" aria-label="reseau de l'admin reseau" [(ngModel)] ="utilisateur.reseau_id">
+                      <optionngFor="let reseau of tabReseaux" [value]="reseau.id" >{{reseau.nom}}</option>
+                  </select> -->
+              <!-- </div> -->
+                <!-- <label>Hôpital:</label>
+                <input type="text" [(ngModel)]="hopital" name="hopital" required><br> -->
+
+                <!-- Champs pour l'hôpital -->
+                <label>Hôpital:</label>
+                <select [(ngModel)]="hopital" name="hopital" required>
+                  <option *ngFor="let h of hopitaux" [value]="h.id">{{ h.nom }}</option>
+                </select><br>
+              </div>
+
+              <!-- Champs spécifiques pour le rôle du patient -->
+              <div *ngIf="role_id === 3">
+                <label>Poids:</label>
+                <input type="number" [(ngModel)]="poids" name="poids" required><br>
+
+                <label>Age:</label>
+                <input type="number" [(ngModel)]="age" name="age" required><br>
+              </div>
+
+              <button type="submit">S'inscrire</button>
+            </form>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
