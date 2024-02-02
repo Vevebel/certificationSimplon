@@ -1,0 +1,97 @@
+<app-sidebar></app-sidebar>
+<app-navbar-conttout></app-navbar-conttout>
+<!-- MAIN -->
+<main>
+  <button type="button" class="btn btnAdd" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Ajouter un Article
+  </button>
+  <!-- <div class="content-wrapper">
+    <div class="">
+      <h2 class="card-title text-center">Contenu de la plateforme</h2>
+      <div class="row mt-5 d-flex justify-content-center cardContenu">
+        <div class="col-sm-12 col-md-6 col-lg-4 mt-5" > -->
+        <!-- <div class="col-sm-12 col-md-6 col-lg-4 mt-5" *ngFor="let article of Articles()"> -->
+          <!-- <div class="card imgCard" style="width: 18rem;">
+            <img src="https://img.freepik.com/photos-gratuite/concept-controle-qualite-standard-m_23-2150041859.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{article.titre}}</h5>
+              <p class="card-text">{{article.description  }}</p>
+              <a class="">
+                <i class="fa-solid fa-eye me-4" style="color: #ce0033;" [routerLink]="['/detailarticle', article.id]" ></i>
+                <i class="fa-solid fa-pen me-4" style="color: #ce0033;" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosarticle(article)"></i>
+                <i class="fa-solid fa-trash-can me-4" style="color: #ce0033;" (click)="supprimerarticle(article.id)"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+         <!-- pour la pagination -->
+<!-- <div class="d-flex flex-wrap justify-content-center my-5">
+  <button class="btn btnColor me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
+    Précédent
+  </button>
+  <button class="btn btnColor ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
+    {{ page }}
+  </button>
+  <button class="btn btnColor ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
+    Suivant
+  </button>
+</div> -->
+</main>
+<!-- MAIN -->
+
+
+<!-- Popup pour ajouter un service -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un article</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" >
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Titre</label>
+            <input type="text" class="form-control" name="titrearticle" id="exampleFormControlInput1" placeholder="" [(ngModel)]="titre">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Contenu</label>
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="descrip"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary" (click)="addArticle()">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- Popup pour modifier un article-->
+<!-- <div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modifierModalLabel">Modifier un service</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="modifierFormControlInput1" class="form-label">Titre</label>
+          <input type="text" class="form-control" name="titrearticle"id="modifierFormControlInput1" placeholder=""[(ngModel)]="titre">
+        </div>
+        <div class="mb-3">
+          <label for="modifierFormControlTextarea1" class="form-label">Contenu</label>
+          <textarea class="form-control" name="description" id="modifierFormControlTextarea1" rows="3" [(ngModel)]="descrip"></textarea >
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary" (click)="modifierArticle()">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div> -->

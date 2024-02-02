@@ -13,13 +13,32 @@ import { DetailMedecinsComponent } from './detail-medecins/detail-medecins.compo
 import { AproposComponent } from './apropos/apropos.component';
 import { DashboardPrincipalComponent } from './dashboard-principal/dashboard-principal.component';
 import { DetailsArticleComponent } from './details-article/details-article.component';
-import { LitesArticleComponent } from './lites-article/lites-article.component';
+// import { LitesArticleComponent } from './lites-article/lites-article.component';
 import { ContactComponent } from './contact/contact.component';
 import { PriseRdvComponent } from './prise-rdv/prise-rdv.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { DataService } from './servicesSRNRV/data.service';
+// import { LitesArticleComponent } from './lites-articleOld/lites-article.component';
+import { ArticleService } from './servicesSRNRV/article.service';
+import { ListeArticlesComponent } from './liste-articles/liste-articles.component';
+import { SidebarComponent } from './Dashbord/sidebar/sidebar.component';
+import { SidebarConttoutComponent } from './Dashbord/sidebar-conttout/sidebar-conttout.component';
+import { NavbarConttoutComponent } from './Dashbord/navbar-conttout/navbar-conttout.component';
+import { DashAdminComponent } from './Dashbord/dash-admin/dash-admin.component';
+import { DashMedecinComponent } from './Dashbord/dash-medecin/dash-medecin.component';
+import { DashPatientComponent } from './Dashbord/dash-patient/dash-patient.component';
+import { DataTablesModule } from 'angular-datatables';
+import { GestionContenueComponent } from './Dashbord/gestion-contenue/gestion-contenue.component';
+import { GestionUtilisateurComponent } from './Dashbord/gestion-utilisateur/gestion-utilisateur.component';
+import { GestionRoleComponent } from './Dashbord/gestion-role/gestion-role.component';
+import { GestionArticleComponent } from './Dashbord/gestion-article/gestion-article.component';
+import { ListePatientComponent } from './Dashbord/liste-patient/liste-patient.component';
+import { ListeConsultationComponent } from './Dashbord/liste-consultation/liste-consultation.component';
+import { ListeRDVEnAttenteComponent } from './Dashbord/liste-rdven-attente/liste-rdven-attente.component';
+import { HistoriqueDesRVComponent } from './Dashbord/historique-des-rv/historique-des-rv.component';
+import { MesMedecinComponent } from './Dashbord/mes-medecin/mes-medecin.component';
 
 @NgModule({
   declarations: [
@@ -35,10 +54,27 @@ import { DataService } from './servicesSRNRV/data.service';
     AproposComponent,
     DashboardPrincipalComponent,
     DetailsArticleComponent,
-    LitesArticleComponent,
+    // LitesArticleComponent,
     ContactComponent,
     PriseRdvComponent,
-    AuthentificationComponent
+    AuthentificationComponent,
+    ListeArticlesComponent,
+    SidebarComponent,
+    SidebarConttoutComponent,
+    NavbarConttoutComponent,
+    DashAdminComponent,
+    DashMedecinComponent,
+    DashPatientComponent,
+    GestionContenueComponent,
+    GestionUtilisateurComponent,
+    GestionRoleComponent,
+    GestionArticleComponent,
+    ListePatientComponent,
+    ListeConsultationComponent,
+    ListeRDVEnAttenteComponent,
+    HistoriqueDesRVComponent,
+    MesMedecinComponent,
+    // LitesArticleComponent
   ],
   imports: [
     BrowserModule,
@@ -46,10 +82,12 @@ import { DataService } from './servicesSRNRV/data.service';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    DataTablesModule,
 
   ],
   providers: [
-    DataService
+    DataService,
+    ArticleService
   ],
   bootstrap: [AppComponent]
 })

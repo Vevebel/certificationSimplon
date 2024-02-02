@@ -1,0 +1,29 @@
+.rectangle{
+  background-color: #CE0033;
+  height: 55vh;
+  border-radius: 25px;
+  width: 50vh;
+}
+.imgRv{
+  height: 55vh;
+  /* width: 100%; */
+  border-radius: 25px;
+  width: 50vh;
+}
+.emplacementIMg{
+  margin-top: -43vh;
+  margin-left: 10vh;
+
+}
+.rendezVous{
+margin-bottom: 10vh;
+}
+.rendezVousA{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 5vh;
+  border: 4px solid #ff2fff;
+}
+.partieFoto{
+
+}

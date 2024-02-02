@@ -3,3 +3,15 @@
   grid-template-columns: 45% 45%;
   gap: 5vh;
 }
+
+.link{
+  cursor: pointer;
+  /* color: #ce0033; */
+  text-decoration: underline;
+}
+.link:hover{
+  color: #ce0033;
+}
+#floatingInput{
+  border: 2px solid #ce0033;
+}
