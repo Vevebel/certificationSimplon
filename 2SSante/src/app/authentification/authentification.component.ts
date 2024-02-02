@@ -190,14 +190,7 @@ export class AuthentificationComponent implements OnInit{
 
       email: this.email,
       password: this.password,
-      // telephone: this.telephone,
-      // genre: this.genre,
-      // role_id: this.role_id,
-      // ville: this.ville,
-      // secteur_activite: this.secteur_activite,
-      // hopital: this.hopital,
-      // poids: this.poids,
-      // age: this.age,
+
 
     };
     this.authservice.connexion(userData).subscribe(
@@ -207,12 +200,12 @@ export class AuthentificationComponent implements OnInit{
         localStorage.setItem('userData', userDataJSON);
         this.resetFields();
         if(response.access_token.user.role_id===1){
-          this.route.navigate(['dashboardAdmin']);
+          this.route.navigate(['/dashboardAdmin']);
         }else if(response.access_token.user.role_id===2){
-          this.route.navigate(['dashboardMed']);
+          this.route.navigate(['/dashboardMed']);
 
         }else if(response.access_token.user.role_id===3){
-          this.route.navigate(['dashboardPatient']);
+          this.route.navigate(['/dashboardPatient']);
         } else {
           // Redirection par défaut
           this.router.navigate(['/default-page']);

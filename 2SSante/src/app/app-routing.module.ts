@@ -22,6 +22,7 @@ import { ListeConsultationComponent } from './Dashbord/liste-consultation/liste-
 import { ListeRDVEnAttenteComponent } from './Dashbord/liste-rdven-attente/liste-rdven-attente.component';
 import { HistoriqueDesRVComponent } from './Dashbord/historique-des-rv/historique-des-rv.component';
 import { MesMedecinComponent } from './Dashbord/mes-medecin/mes-medecin.component';
+import { DashMedecinComponent } from './Dashbord/dash-medecin/dash-medecin.component';
 // import { AuthentificationComponent } from './AuthentificationComponent/authentification.component';
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path : 'priseRV', component : PriseRdvComponent,},
   {path : 'detailMed', component : DetailMedecinsComponent,},
   {path : 'dashboardAdmin', component : DashAdminComponent,},
+  {path : 'dashboardMed', component :DashMedecinComponent ,},
   {path : 'dasbordPatient', component :DashPatientComponent ,},
   {path : 'gestion-contenu', component :GestionContenueComponent ,},
   {path : 'gestion-user', component : GestionUtilisateurComponent,},

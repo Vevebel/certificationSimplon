@@ -19,5 +19,23 @@ border: 3px solid;
 
   /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0); */
   /* border: 5px solid #E68513; */
-  margin-top: 3vh;
+  margin-top: 4vh;
+  background-color: #CE0033 ;
+  align-items: center !important;
+  justify-content: center;
+  display: flex;
+}
+.carteArticle{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 5vh;
+}
+main{
+  width: 100%;
+  margin-left: 10%;
+}
+.contenu{
+  width: 70%;
+  margin: 2% auto;
+  /* border: 1px solid red; */
 }

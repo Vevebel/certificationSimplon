@@ -1,4 +1,4 @@
-import { User } from '../modelSRS/users';
+import { Users } from '../modelSRS/users';
 
 export class Medecin {
   specialite!: string;

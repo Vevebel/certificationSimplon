@@ -5,23 +5,25 @@ import { Article } from '../modelSRS/Articles';
   providedIn: 'root'
 })
 export class MedecinService {
+  ajouterArticle(articleData: FormData) {
+    throw new Error('Method not implemented.');
+  }
 
   private articles: Article[] = [];
 
   addArticle(titre: string, description: string, image: File) {
-      const newArticle: Article = {
-        nomArticle: titre,
-        description: description,
-        image: image,
-        id: '',
-        details: '',
-        estArchive: false,
-        createdAt: '',
-        updatedAt: '',
-        createdBy: '',
-        updatedBy: ''
-      };
-      this.articles.push(newArticle);
+      this.articles.push({
+          nomArticle: titre,
+          description: description,
+          image: image,
+          id: '',
+          details: '',
+          estArchive: false,
+          createdAt: '',
+          updatedAt: '',
+          createdBy: '',
+          updatedBy: ''
+        });
   }
 
   getAllArticles() {

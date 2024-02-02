@@ -1,50 +1,82 @@
-<app-sidebar></app-sidebar>
+<app-sidebar-conttout></app-sidebar-conttout>
 <app-navbar-conttout></app-navbar-conttout>
 <!-- MAIN -->
-<main>
-  <button type="button" class="btn btnAdd" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Ajouter un Article
-  </button>
-  <!-- <div class="content-wrapper">
-    <div class="">
-      <h2 class="card-title text-center">Contenu de la plateforme</h2>
-      <div class="row mt-5 d-flex justify-content-center cardContenu">
-        <div class="col-sm-12 col-md-6 col-lg-4 mt-5" > -->
-        <!-- <div class="col-sm-12 col-md-6 col-lg-4 mt-5" *ngFor="let article of Articles()"> -->
-          <!-- <div class="card imgCard" style="width: 18rem;">
+
+  <div class="contenu">
+    <main>
+      <div class="container">
+        <button type="button" class="btn btnAdd" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Ajouter un Article
+        </button>
+        <div class="carteArticle">
+          <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let article of articles">
+            <div class="card imgCard" style="width: 18rem;">
+              <img [src]="article.image" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ article.titre }}</h5>
+                <p class="card-text">{{ article.description }}</p>
+                <a class="text-center d-flex justify-content-center">
+                  <i class="fa-solid fa-eye me-4" style="color: #CE0033;"></i>
+                  <i class="fa-solid fa-pen me-4" style="color: #CE0033;"></i>
+                  <i class="fa-solid fa-trash-can me-4" style="color: #CE0033;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      <!-- <div class="carteArticle">
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card imgCard" style="width: 18rem;">
             <img src="https://img.freepik.com/photos-gratuite/concept-controle-qualite-standard-m_23-2150041859.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">{{article.titre}}</h5>
-              <p class="card-text">{{article.description  }}</p>
-              <a class="">
-                <i class="fa-solid fa-eye me-4" style="color: #ce0033;" [routerLink]="['/detailarticle', article.id]" ></i>
-                <i class="fa-solid fa-pen me-4" style="color: #ce0033;" data-bs-toggle="modal" data-bs-target="#modifierModal" (click)="chargerInfosarticle(article)"></i>
-                <i class="fa-solid fa-trash-can me-4" style="color: #ce0033;" (click)="supprimerarticle(article.id)"></i>
+              <h5 class="card-title">Informatique</h5>
+              <p class="card-text">Le mentorat en informatique, c’est bien plus qu’une profession, c’est une passerelle vers l’excellence numérique. En tant que mentor en informatique, ....</p>
+              <a class="text-center d-flex justify-content-center">
+                <i class="fa-solid fa-eye me-4" style="color: #CE0033;"></i>
+                <i class="fa-solid fa-pen me-4" style="color: #CE0033;"></i>
+                <i class="fa-solid fa-trash-can me-4" style="color: #CE0033;"></i>
               </a>
             </div>
           </div>
         </div>
-      </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card imgCard" style="width: 18rem;">
+            <img src="https://img.freepik.com/photos-gratuite/portrait-oeil-abstrait-elegance-jeunes-femmes-generee-par-ia_188544-9712.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=sph" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Art</h5>
+              <p class="card-text">Le mentorat en art est une forme d’accompagnement artistique qui transcende les techniques et les médiums. En tant que mentor en art, vous avez le po, ....</p>
+              <a class="">
+                <i class="fa-solid fa-eye me-4" style="color: #CE0033;"></i>
+                <i class="fa-solid fa-pen me-4" style="color: #CE0033;"></i>
+                <i class="fa-solid fa-trash-can me-4" style="color: #CE0033;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card imgCard" style="width: 18rem;">
+            <img src="https://img.freepik.com/photos-gratuite/homme-affaires-noir-aide-ordinateur-portable_53876-24736.jpg?size=626&ext=jpg&ga=GA1.1.12207566.1692912950&semt=ais" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Gestion et management</h5>
+              <p class="card-text">Le mentorat en gestion est une profession dédiée à façonner les futurs leaders et à renforcer les compétences en gestion. En tant que mentor en gestion, ...</p>
+              <a class="">
+                <i class="fa-solid fa-eye me-4" style="color: #CE0033;"></i>
+                <i class="fa-solid fa-pen me-4" style="color: #CE0033;"></i>
+                <i class="fa-solid fa-trash-can me-4" style="color: #CE0033;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div> -->
     </div>
-  </div> -->
-         <!-- pour la pagination -->
-<!-- <div class="d-flex flex-wrap justify-content-center my-5">
-  <button class="btn btnColor me-2" [disabled]="pageActuelle === 1" (click)="pageActuelle = pageActuelle - 1">
-    Précédent
-  </button>
-  <button class="btn btnColor ms-2" *ngFor="let page of pages" (click)="pageActuelle = page">
-    {{ page }}
-  </button>
-  <button class="btn btnColor ms-2" [disabled]="pageActuelle === totalPages" (click)="pageActuelle = pageActuelle + 1">
-    Suivant
-  </button>
-</div> -->
-</main>
-<!-- MAIN -->
+    </main>
 
+  </div>
+<!-- ajout Article -->
 
-<!-- Popup pour ajouter un service -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -52,46 +84,25 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="" >
-          <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Titre</label>
-            <input type="text" class="form-control" name="titrearticle" id="exampleFormControlInput1" placeholder="" [(ngModel)]="titre">
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Contenu</label>
-            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="descrip"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary" (click)="addArticle()">Ajouter</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- Popup pour modifier un article-->
-<!-- <div class="modal fade" id="modifierModal" tabindex="-1" aria-labelledby="modifierModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="modifierModalLabel">Modifier un service</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
         <div class="mb-3">
-          <label for="modifierFormControlInput1" class="form-label">Titre</label>
-          <input type="text" class="form-control" name="titrearticle"id="modifierFormControlInput1" placeholder=""[(ngModel)]="titre">
+          <label for="titre" class="form-label">Titre</label>
+          <input type="text" class="form-control" id="titre" [(ngModel)]="titre" placeholder="">
         </div>
+
         <div class="mb-3">
-          <label for="modifierFormControlTextarea1" class="form-label">Contenu</label>
-          <textarea class="form-control" name="description" id="modifierFormControlTextarea1" rows="3" [(ngModel)]="descrip"></textarea >
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" [(ngModel)]=" description" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="formFileMultiple" class="form-label">Image(s)</label>
+          <input class="form-control" type="file" id="formFileMultiple"  (change)="getFile($event)">
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary" (click)="modifierArticle()">Modifier</button>
+        <button type="button" class="btn btn-primary" (click)="ajout()" data-bs-dismiss="modal">Ajouter</button>
       </div>
     </div>
   </div>
-</div> -->
+</div>
