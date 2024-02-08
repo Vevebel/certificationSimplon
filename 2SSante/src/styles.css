@@ -11,3 +11,16 @@ a {
 li {
 	list-style: none;
 }
+#imagecard{
+  height: 45vh;
+}
+/* .card {
+  height: 90vh;
+  box-shadow: 0px 0px 8px #E68513;
+} */
+/* .card-text{
+  height: 55vh;
+} */
+.card-title{
+  height: 10vh;
+}

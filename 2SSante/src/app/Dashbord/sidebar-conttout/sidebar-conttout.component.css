@@ -14,12 +14,27 @@ li {
 	left: 0;
 	width: 280px;
 	height: 100%;
-	background-color:#CE0033;
+	/* background-color:#CE0033; */
 	z-index: 2000;
 	font-family: var(--lato);
 	transition: .3s ease;
 	overflow-x: hidden;
 	scrollbar-width: none;
+}
+.patient-bg {
+  background-color: #ffffff;
+  color: black;/* Couleur de fond pour les patients */
+  border-right:1px black solid;
+}
+
+/* Styles spécifiques pour les médecins */
+.medecin-bg {
+  background-color:#CE0033;; /* Couleur de fond pour les médecins */
+}
+
+/* Styles spécifiques pour les administrateurs */
+.admin-bg {
+  background-color:#CE0033; /* Couleur de fond pour les administrateurs */
 }
 #sidebar::--webkit-scrollbar {
 	display: none;
@@ -98,6 +113,11 @@ li {
 }
 .profilecon{
   border-radius: 50%;
+  margin-top: 3vh;
+  width: 25vh;
+}
+.profileconPatient{
+  /* border-radius: 50%; */
   margin-top: 3vh;
   width: 25vh;
 }

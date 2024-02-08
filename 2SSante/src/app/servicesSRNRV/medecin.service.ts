@@ -13,17 +13,18 @@ export class MedecinService {
 
   addArticle(titre: string, description: string, image: File) {
       this.articles.push({
-          nomArticle: titre,
-          description: description,
-          image: image,
-          id: '',
-          details: '',
-          estArchive: false,
-          createdAt: '',
-          updatedAt: '',
-          createdBy: '',
-          updatedBy: ''
-        });
+        nomArticle: titre,
+        description: description,
+        image: image,
+        id: '',
+        details: '',
+        estArchive: false,
+        createdAt: '',
+        updatedAt: '',
+        createdBy: '',
+        updatedBy: '',
+        titre: undefined
+      });
   }
 
   getAllArticles() {

@@ -42,19 +42,16 @@ export class AuthentificationComponent implements OnInit{
   tabUsers: any;
   router: any;
 
-
-
-
   // Les fonctions
-  inscriptionMedecin(){
-    this.isPatient = false;
-    this.isMedecin = true;
-  }
+  // inscriptionMedecin(){
+  //   this.isPatient = false;
+  //   this.isMedecin = true;
+  // }
 
-  inscriptionPatient(){
-    this.isPatient = true;
-    this.isMedecin = false;
-  }
+  // inscriptionPatient(){
+  //   this.isPatient = true;
+  //   this.isMedecin = false;
+  // }
   // Variables pour faire la vérifications
   verifNom : string  =  "";
   verifPrenom : string = "";
@@ -125,13 +122,122 @@ export class AuthentificationComponent implements OnInit{
 
     // Vous pouvez implémenter des actions en fonction du rôle sélectionné ici
   }
-  inscription() {
-    // Implémentez la logique d'inscription ici
-    console.log('Méthode inscription() appelée.');
+  // inscription() {
+  //   // Implémentez la logique d'inscription ici
+  //   console.log('Méthode inscription() appelée.');
 
-    // inscription() {
-      // Création de l'objet représentant l'utilisateur à inscrire
-      const userData = {
+  //   // inscription() {
+  //     // Création de l'objet représentant l'utilisateur à inscrire
+  //     const userData = {
+  //       nom: this.nom,
+  //       email: this.email,
+  //       password: this.password,
+  //       telephone: this.telephone,
+  //       genre: this.genre,
+  //       role_id: this.role_id,
+  //       ville: this.ville,
+  //       secteur_activite: this.secteur_activite,
+  //       hopital: this.hopital,
+  //       poids: this.poids,
+  //       age: this.age,
+  //       statut: 'en_attente',
+  //     };
+
+  //     // Appel du service d'authentification pour l'inscription du médecin
+  //   this.authservice.inscriptionMedecin(userData).subscribe(
+  //     (response: any) => {
+  //         console.log(response);
+  //         if (response.success) {
+  //             // Gérer l'inscription réussie du médecin
+  //             this.verifierChamps("Inscription réussie!", "", "success");
+  //             this.resetFields();
+  //         } else {
+  //             // Gérer les cas où l'inscription du médecin a échoué
+  //             this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
+  //         }
+  //     },
+  //     (error: any) => {
+  //         console.error("Erreur lors de l'inscription du médecin :", error);
+  //     }
+  // );
+
+  // // Appel du service d'authentification pour l'inscription du patient
+  // this.authservice.inscriptionPatient(userData).subscribe(
+  //     (response: any) => {
+  //         console.log(response);
+  //         if (response.success) {
+  //             // Gérer l'inscription réussie du patient
+  //             this.verifierChamps("Inscription réussie!", "", "success");
+  //             this.resetFields();
+  //         } else {
+  //             // Gérer les cas où l'inscription du patient a échoué
+  //             this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
+  //         }
+  //     },
+  //     (error: any) => {
+  //         console.error("Erreur lors de l'inscription du patient :", error);
+  //     }
+  // );
+  //     // Appel du service d'authentification pour l'inscription
+  //     // this.authservice.inscriptionMedecin(userData).subscribe(
+  //     //   (response: any) => {
+  //     //     console.log(response);
+  //     //     if (response.success) {
+  //     //       // Gérer l'inscription réussie du patient
+  //     //       this.verifierChamps("Inscription réussie!", "", "success");
+  //     //       this.resetFields();
+  //     //     } else {
+  //     //       // Gérer les cas où l'inscription du patient a échoué
+  //     //       this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
+  //     //     }
+  //     //     // Gérer la réponse réussie, par exemple, afficher un message de succès
+  //     //     // Réinitialiser les champs du formulaire après une inscription réussie
+  //     //     // this.verifierChamps("Inscription réussie!", "", "success");
+  //     //     // this.resetFields();
+  //     //   },
+  //     //   (error: any) => {
+  //     //   //   console.log(error);
+  //     //   //   // Gérer les erreurs, par exemple, afficher un message d'erreur à l'utilisateur
+  //     //   //   this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
+  //     //   // }
+  //     //   console.error("Erreur lors de l'inscription du médecin :", error);
+
+  //     //   }
+  //     // );
+  //     // this.authservice.inscriptionPatient(userData).subscribe(
+  //     //   (response: any) => {
+  //     //     console.log(response);
+  //     //     if (response.success) {
+  //     //       // Gérer l'inscription réussie du patient
+  //     //       this.verifierChamps("Inscription réussie!", "", "success");
+  //     //       this.resetFields();
+  //     //     } else {
+  //     //       // Gérer les cas où l'inscription du patient a échoué
+  //     //       this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
+  //     //     }
+  //     //     // Gérer la réponse réussie, par exemple, afficher un message de succès
+  //     //     // Réinitialiser les champs du formulaire après une inscription réussie
+  //     //     // this.verifierChamps("Inscription réussie!", "", "success");
+  //     //     // this.resetFields();
+  //     //   },
+  //     //   (error: any) => {
+  //     //     console.error("Erreur lors de l'inscription du patient :", error);
+
+  //     //     // console.log(error);
+  //     //     // Gérer les erreurs, par exemple, afficher un message d'erreur à l'utilisateur
+  //     //     // this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
+  //     //   }
+  //     // );
+  //   // }
+
+
+  //   // const userdataI
+
+  // }
+
+  inscriptionMedecin() {
+    // Création de l'objet représentant l'utilisateur à inscrire
+    const userData = {
         nom: this.nom,
         email: this.email,
         password: this.password,
@@ -143,44 +249,88 @@ export class AuthentificationComponent implements OnInit{
         hopital: this.hopital,
         poids: this.poids,
         age: this.age,
-      };
-
-      // Appel du service d'authentification pour l'inscription
-      this.authservice.inscriptionMedecin(userData).subscribe(
-        (response: any) => {
-          console.log(response);
-          // Gérer la réponse réussie, par exemple, afficher un message de succès
-          // Réinitialiser les champs du formulaire après une inscription réussie
-          this.verifierChamps("Inscription réussie!", "", "success");
-          this.resetFields();
-        },
-        (error: any) => {
-          console.log(error);
-          // Gérer les erreurs, par exemple, afficher un message d'erreur à l'utilisateur
-          this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
-        }
-      );
-      this.authservice.inscriptionPatient(userData).subscribe(
-        (response: any) => {
-          console.log(response);
-          // Gérer la réponse réussie, par exemple, afficher un message de succès
-          // Réinitialiser les champs du formulaire après une inscription réussie
-          this.verifierChamps("Inscription réussie!", "", "success");
-          this.resetFields();
-        },
-        (error: any) => {
-          console.log(error);
-          // Gérer les erreurs, par exemple, afficher un message d'erreur à l'utilisateur
-          this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
-        }
-      );
+        statut: 'en_attente',
+    };
+    // inscriptionMedecin(){
+      this.isPatient = false;
+      this.isMedecin = true;
     // }
 
+    // inscriptionPatient(){
+    //   this.isPatient = true;
+    //   this.isMedecin = false;
+    // }
+    // Appel du service d'authentification pour l'inscription du médecin
+    this.authservice.inscriptionMedecin(userData).subscribe(
+        (response: any) => {
+            console.log(response);
+            if (response.success) {
+                // Gérer l'inscription réussie du médecin
+                this.verifierChamps("Inscription réussie!", "", "success");
+                this.resetFields();
+            } else {
+                // Gérer les cas où l'inscription du médecin a échoué
+                this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
+            }
+        },
+        (error: any) => {
+            console.error("Erreur lors de l'inscription du médecin :", error);
+        }
+    );
+}
 
-    // const userdataI
+inscriptionPatient() {
+    // Création de l'objet représentant l'utilisateur à inscrire
+    const userData = {
+        nom: this.nom,
+        email: this.email,
+        password: this.password,
+        telephone: this.telephone,
+        genre: this.genre,
+        role_id: this.role_id,
+        ville: this.ville,
+        secteur_activite: this.secteur_activite,
+        hopital: this.hopital,
+        poids: this.poids,
+        age: this.age,
+        statut: 'en_attente',
+    };
+    // inscriptionMedecin(){
+    //   this.isPatient = false;
+    //   this.isMedecin = true;
+    // }
 
-  }
+    // inscriptionPatient(){
+      this.isPatient = true;
+      this.isMedecin = false;
+    // }
+    // Appel du service d'authentification pour l'inscription du patient
+    this.authservice.inscriptionPatient(userData).subscribe(
+        (response: any) => {
+            console.log(response);
+            if (response.success) {
+                // Gérer l'inscription réussie du patient
+                this.verifierChamps("Inscription réussie!", "", "success");
+                this.resetFields();
+            } else {
+                // Gérer les cas où l'inscription du patient a échoué
+                this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
+            }
+        },
+        (error: any) => {
+            console.error("Erreur lors de l'inscription du patient :", error);
+        }
+    );
+}
 
+inscription() {
+    // Déterminer si l'inscription est pour un médecin ou un patient
+    if (this.isMedecin) {
+        this.inscriptionMedecin();
+    } else if (this.isPatient) {
+        this.inscriptionPatient();
+    }
+}
 
   connexion() {
     console.log('Email:', this.email);
@@ -199,6 +349,7 @@ export class AuthentificationComponent implements OnInit{
         const userDataJSON = JSON.stringify(response);
         localStorage.setItem('userData', userDataJSON);
         this.resetFields();
+        this.authservice.setToken(response.access_token.token)
         if(response.access_token.user.role_id===1){
           this.route.navigate(['/dashboardAdmin']);
         }else if(response.access_token.user.role_id===2){
@@ -283,10 +434,6 @@ export class AuthentificationComponent implements OnInit{
     }
   }
 
-  // verifPrenomFonction() {
-  //   // Logique de vérification du prénom
-  // }
-
   verifEmailFonction() {
     // Logique de vérification de l'email
     const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
@@ -365,6 +512,18 @@ export class AuthentificationComponent implements OnInit{
       this.exactPassword = true;
     }
   }
+  verifPasswordConfFonction() {
+    // Logique de vérification de la confirmation du mot de passe
+    this.exactPasswordConf = false;
+    if(this.passwordConf === "") {
+      this.verifPasswordConf = "Veuillez confirmer votre mot de passe";
+    } else if (this.password !== this.passwordConf) {
+      this.verifPasswordConf = "La confirmation du mot de passe ne correspond pas";
+    } else {
+      this.verifPasswordConf = "";
+      this.exactPasswordConf = true;
+    }
+  }
 
   verifPasswordConFonction() {
     // Logique de vérification du mot de passe pour la connexion
@@ -401,10 +560,10 @@ export class AuthentificationComponent implements OnInit{
     this.verifNomFonction();
     // this.verifPrenomFonction();
     this.verifPasswordFonction();
-    // this.verifPasswordConfFonction();
+    this.verifPasswordConfFonction();
 
     // Si les champs sont exacts, on ajoute le compte dans le tableau localStorage
-    if(this.exactNom && this.exactPrenom && this.exactEmail && this.exactPassword ){
+    if(this.exactNom && this.exactPrenom && this.exactEmail && this.exactPassword && this.exactPasswordConf ){
       let user = {
         // idUser:  this.idLastUser + 1,
         nom: this.nom,
@@ -429,9 +588,7 @@ export class AuthentificationComponent implements OnInit{
       }
   }
 
-  // connexion() {
-  //   // Logique de connexion
-  // }
+
 
   // resetFields() {
   //   // Réinitialisation des champs

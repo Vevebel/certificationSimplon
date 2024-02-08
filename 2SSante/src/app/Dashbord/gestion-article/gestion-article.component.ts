@@ -24,34 +24,6 @@ export class GestionArticleComponent  implements OnInit {
   // liste article
   articles:any;
 
-  // le tableau
-  tabListArticle: any[] = [];
-
-  // // variables choix de produits
-  // tabProduits: boolean = true;
-  // tabPacks: boolean = false;
-  // tabClients: boolean = false;
-
-  // //choix de produits pour tableau produits
-  // afficheProduits() {
-  //   this.tabProduits = true;
-  //   this.tabPacks = false;
-  //   this.tabClients = false;
-  // }
-
-  //choix de produits pour tableau packs
-  // affichePacks() {
-  //   this.tabProduits = false;
-  //   this.tabPacks = true;
-  //   this.tabClients = false;
-  // }
-
-  //choix de produits pour tableau clients
-  // afficheClients() {
-  //   this.tabProduits = false;
-  //   this.tabPacks = false;
-  //   this.tabClients = true;
-  // }
 
   constructor(
      private authentification : AuthentificationService,
@@ -67,18 +39,16 @@ export class GestionArticleComponent  implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listerDesArticles();
+    this.getArticle();
     let user = JSON.parse(localStorage.getItem("userData") || "")
     console.log(user);
     console.log(JSON.parse(localStorage.getItem("userData") ?? '{}').access_token.token )
     // this.filteredProduit=this.tabListProduit
     // this.modifierArticle();
     // this.ajout();
-    this.getArticle();
+    this.listerDesArticles();
   }
-  modifierArticle() {
-    throw new Error('Method not implemented.');
-  }
+
 
   //methode pour ajouter des prduits
   ajout(): void {
@@ -93,6 +63,7 @@ export class GestionArticleComponent  implements OnInit {
         (rep) => {
           console.log('réussi POOOOOOOO', rep);
           localStorage.setItem('userConnect', rep.token);
+          this.listerDesArticles();
         },
         (error) => {
           console.error('erreur', error);
@@ -113,7 +84,8 @@ export class GestionArticleComponent  implements OnInit {
     // console.log(this.tabListProduit);
     this.articleService.getArticle().subscribe((data) => {
       console.log('listeArticle', data);
-      console.log(this.listerDesArticles);
+      this.articles= data.Articles;
+      console.log("new data",data.Articles);
     });
   }
 
@@ -136,19 +108,25 @@ export class GestionArticleComponent  implements OnInit {
 
   modifierarticle() {
     let formData = new FormData();
-      formData.append('nomArticle', this.titre,);
+      formData.append('titre', this.titre,);
       formData.append('image', this.image,);
       formData.append('description', this.description,);
     this.articleService.updateArticle(this.id, formData).subscribe((response) => {
         console.log('modifArticle', response);
+        this.listerDesArticles();
+
       });
+      // this.ngOnInit();
+      // this.listerDesArticles();
+      // this.articles;
+
   }
   // declare id
   id: number = 0;
   chargerInfosArticle(article: any) {
     console.log(article);
     this.id = article.id;
-    console.warn('lid de marigo', this.id);
+    console.warn('lid de vv', this.id);
     this.titre = article.titre;
     this.description = article.description;
     this.image = article.image;
@@ -189,34 +167,34 @@ export class GestionArticleComponent  implements OnInit {
 
   // Pagination
     //  Attribut pour la pagination
-     itemsParPage = 3;
+    //  itemsParPage = 3;
     //  Nombre d'articles par page
-     pageActuelle = 1;
+    //  pageActuelle = 1;
       // Page actuelle
      tabMessages: any[] = [];
      tabMessagesFilter: any[] = [];
   // Méthode pour déterminer les articles à afficher sur la page actuelle
-    getItemsPage(): any[] {
-      console.log('pagi',this.getItemsPage)
-      if (Array.isArray(this.tabMessagesFilter)) {
-      const indexDebut = (this.pageActuelle - 1) * this.itemsParPage;
-      const indexFin = indexDebut + this.itemsParPage;
-      return this.tabMessagesFilter.slice(indexDebut, indexFin);
-    } else {
-      return [];
-    }
-  }
+  //   getItemsPage(): any[] {
+  //     console.log('pagi',this.getItemsPage)
+  //     if (Array.isArray(this.tabMessagesFilter)) {
+  //     const indexDebut = (this.pageActuelle - 1) * this.itemsParPage;
+  //     const indexFin = indexDebut + this.itemsParPage;
+  //     return this.tabMessagesFilter.slice(indexDebut, indexFin);
+  //   } else {
+  //     return [];
+  //   }
+  // }
 
   // Méthode pour générer la liste des pages
-  get pages(): number[] {
-    const totalPages = Math.ceil(this.tabMessagesFilter.length / this.itemsParPage);
-    return Array(totalPages).fill(0).map((_, index) => index + 1);
-  }
+  // get pages(): number[] {
+  //   const totalPages = Math.ceil(this.tabMessagesFilter.length / this.itemsParPage);
+  //   return Array(totalPages).fill(0).map((_, index) => index + 1);
+  // }
 
   // Méthode pour obtenir le nombre total de pages
-  get totalPages(): number {
-    return Math.ceil(this.tabMessagesFilter.length / this.itemsParPage);
-  }
+  // get totalPages(): number {
+  //   return Math.ceil(this.tabMessagesFilter.length / this.itemsParPage);
+  // }
 
   // Methode pour vider les champs
   viderChamps() {

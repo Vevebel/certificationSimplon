@@ -1,2 +1,23 @@
 <app-sidebar-conttout></app-sidebar-conttout>
 <app-navbar-conttout></app-navbar-conttout>
+<div class="contenu">
+
+<main>
+
+  <h1>Liste des Rendez-vous</h1>
+
+  <div *ngIf="rendezVousList.length > 0; else noRendezVous">
+    <div *ngFor="let rendezVous of rendezVousList" class="rdv-item">
+      <h2>Nom du patient: {{ rendezVous.patientName }}</h2>
+      <p>Date du rendez-vous: {{ rendezVous.date }}</p>
+      <p>Heure du rendez-vous: {{ rendezVous.heure }}</p>
+      <button (click)="showDetails(rendezVous.id)">Détails</button>
+      <button (click)="acceptRendezVous(rendezVous.id)">Accepter</button>
+      <button (click)="refuseRendezVous(rendezVous.id)">Refuser</button>
+    </div>
+  </div>
+  <ng-template #noRendezVous>
+    <p>Aucun rendez-vous pour le moment.</p>
+  </ng-template>
+</main>
+</div>

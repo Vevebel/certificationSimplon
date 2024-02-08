@@ -39,6 +39,7 @@ import { ListeConsultationComponent } from './Dashbord/liste-consultation/liste-
 import { ListeRDVEnAttenteComponent } from './Dashbord/liste-rdven-attente/liste-rdven-attente.component';
 import { HistoriqueDesRVComponent } from './Dashbord/historique-des-rv/historique-des-rv.component';
 import { MesMedecinComponent } from './Dashbord/mes-medecin/mes-medecin.component';
+// import { TokenInterceptorProvider } from './token.interceptor';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { MesMedecinComponent } from './Dashbord/mes-medecin/mes-medecin.componen
   ],
   providers: [
     DataService,
-    ArticleService
+    ArticleService,
+    // TokenInterceptorProvider
   ],
   bootstrap: [AppComponent]
 })

@@ -20,19 +20,32 @@ export class ListeArticlesComponent {
     private router : Router,
     ) {}
   ngOnInit(): void {
-    this.loadarticles();
+    // this.loadarticles();
+    this.listerDesArticles();
   }
-    loadarticles(): void {
-    this.articleService.getArticle().subscribe(
-      (articles: Article[]) => {
-        this.articles = articles;
-        this.originalarticles = [...this.articles];
-      },
-      (error: any) => {
-        console.error('Erreur lors du chargement des articles depuis l\'API :', error);
-      }
-    );
-  }
+ 
+    // lister  produits
+    listerDesArticles() {
+      // console.log(this.tabListProduit);
+      this.articleService.getArticle().subscribe((data) => {
+        console.log('listeArticle', data);
+        this.articles= data.Articles;
+        console.log("new data",data.Articles);
+      });
+    }
+
+    // categorie_id: this.categorie_id,
+
+    //  pour recuperer un produit
+    articleSelectionner: any = {};
+
+    getArticle() {
+      this.articleService.getArticle().subscribe((reponse:any)=>{
+        console.log(reponse.Articles.data);
+        this.articles=reponse.Articles.data;
+        console.log(this.articles)
+      })
+    }
   onSearch() {
     if (this.filterValue.trim() === '') {
       this.articles = [...this.originalarticles];

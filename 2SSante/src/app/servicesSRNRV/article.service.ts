@@ -12,7 +12,7 @@
 //   constructor() { }
 // }
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { baseUrl } from './api-url.service';
@@ -21,21 +21,40 @@ import { baseUrl } from './api-url.service';
   providedIn: 'root'
 })
 export class ArticleService {
-  ajouterArticle(nouvelArticle: { nomarticle: string; description: string; }) {
+  [x: string]: any;
+  getArticlesGestion() {
     throw new Error('Method not implemented.');
   }
+  // ajouterArticle(nouvelArticle: { nomarticle: string; description: string; }) {
+  //   throw new Error('Method not implemented.');
+  // }
   constructor(private http: HttpClient) {}
   // modification et la suppression d'articles
   ajoutArticle(formData: FormData): Observable<any> {
-    const httpOptions = {       headers: new HttpHeaders({         Authorization: "Bearer" + JSON.parse(localStorage.getItem("userData") ?? '{}').access_token.token       })     };
+    const httpOptions = {       headers: new HttpHeaders({
+      Authorization: "Bearer" + JSON.parse(localStorage.getItem("userData") ??
+      '{}').access_token.token       })     };
     return this.http.post(`${baseUrl}/article`, formData,httpOptions);
   }
 
-  updateArticle(id: number, formData: FormData): Observable<any> {
-    return this.http.put(`${baseUrl}/articles/${id}`, formData);
+// modifier produit
+updateArticle(id: number, articles:any): Observable<any> {
+
+  const httpOptions = {       headers: new HttpHeaders({
+    Authorization: "Bearer" + JSON.parse(localStorage.getItem("userData") ??
+    '{}').access_token.token       })     };
+
+
+    return this.http.post(`${baseUrl}/update-article/${id}`, articles, httpOptions);
   }
+  // const accessToken = localStorage.getItem('userData');
+  //   return accessToken ?
+  //     this.http.post<any>(`http://127.0.0.1:8000/api/update-article/${id}`, articles, {
+  //     headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` })
+  //   }) : of(null);}
 
   deleteArticle(id: number): Observable<any> {
+    const httpOptions = {       headers: new HttpHeaders({         Authorization: "Bearer" + JSON.parse(localStorage.getItem("userData") ?? '{}').access_token.token       })     };
     return this.http.delete(`${baseUrl}/articles/${id}`);
   }
   getArticle(): Observable<any> {

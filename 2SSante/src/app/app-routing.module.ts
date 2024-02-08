@@ -38,7 +38,7 @@ const routes: Routes = [
   {path : 'detailMed', component : DetailMedecinsComponent,},
   {path : 'dashboardAdmin', component : DashAdminComponent,},
   {path : 'dashboardMed', component :DashMedecinComponent ,},
-  {path : 'dasbordPatient', component :DashPatientComponent ,},
+  {path : 'dashboardPatient', component :DashPatientComponent ,},
   {path : 'gestion-contenu', component :GestionContenueComponent ,},
   {path : 'gestion-user', component : GestionUtilisateurComponent,},
   {path : 'gestion-role', component : GestionRoleComponent,},

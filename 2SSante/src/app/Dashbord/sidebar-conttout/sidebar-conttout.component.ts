@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarConttoutComponent  implements OnInit {
  // Inscription du patient ou du medecin
   // Les variables
+
   isPatient:boolean = false;
   isMedecin:boolean = false;
   isAdmin:boolean=false;

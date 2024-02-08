@@ -23,4 +23,6 @@ ville_id!: number; //(clé étrangère vers le modèle de ville)
 genre!: string ;//('homme' ou 'femme')
 createdAt!: Date;
 updatedAt!: Date;
+// statut!: 'en_attente' | 'approuvé' | 'bloqué';
+statut!: string;
 }

@@ -1,4 +1,4 @@
-<section class="sidebar" id="sidebar">
+<section class="sidebar" id="sidebar" [ngClass]="{'patient-bg': isPatient, 'medecin-bg': isMedecin, 'admin-bg': isAdmin}">
   <!-- <div class="brand " id="brand">
     <!-- <span class="text text-white"><img src="assets/dashboard/logofooter.png" alt=""></span> -->
     <!-- <div class="ms-3"> -->
@@ -7,8 +7,11 @@
 
     <!-- </div> -->
   <!-- </div> -->
-  <div>
+  <div *ngIf="isAdmin ||isMedecin">
     <img src="../../../assets/profilAdminbon.png" alt="" class=" ms-5 profilecon">
+  </div>
+  <div *ngIf="isPatient">
+    <img src="../../../assets/logo certification.png" alt="" class=" ms-5 profileconPatient">
   </div>
   <ul class="side-menu top" *ngIf="isAdmin">
     <li class="active">
@@ -72,25 +75,25 @@
     <li class="active">
       <a >
         <i class='bx bxs-dashboard' [routerLink]="['/dashboardPatient']"></i>
-        <span class="text-white" [routerLink]="['/dashboardPatient']">Dashboard</span>
+        <span class="text-black" [routerLink]="['/dashboardPatient']">Dashboard</span>
       </a>
     </li>
     <li>
       <a>
         <i class='bx bxs-shopping-bag-alt' [routerLink]="['/historique']"></i>
-        <span class="text" [routerLink]="['/historique']">Historique des RDV</span>
+        <span class="text-black" [routerLink]="['/historique']">Historique des RDV</span>
       </a>
     </li>
     <li>
       <a >
         <i class='bx bxs-doughnut-chart' [routerLink]="['/MesMedicin']"></i>
-        <span class="text" [routerLink]="['/MesMedicin']">Mes médecins</span>
+        <span class="text-black" [routerLink]="['/MesMedicin']">Mes médecins</span>
       </a>
     </li>
     <!-- <li>
       <a >
         <i class='bx bxs-message-dots' [routerLink]="['/gestion-profil']"></i>
-        <span class="text" [routerLink]="['/gestion-profil']">Gestion Role</span>
+        <span class="text-black" [routerLink]="['/gestion-profil']">Gestion Role</span>
       </a>
     </li> -->
   </ul>

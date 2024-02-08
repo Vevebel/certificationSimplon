@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./prise-rdv.component.css']
 })
 export class PriseRdvComponent {
+  
 
 }

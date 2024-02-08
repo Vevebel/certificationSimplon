@@ -23,6 +23,13 @@ export class AuthentificationService {
     return this.http.post(`${baseUrl}/login`, userData);
   }
 
+  setToken(token: any) {
+    localStorage.setItem('token', JSON.stringify(token))
+  }
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
   // // Implémentez les méthodes suivantes pour gérer l'ajout, la modification et la suppression d'articles
   // ajoutArticle(formData: FormData): Observable<any> {
   //   const httpOptions = {       headers: new HttpHeaders({         Authorization: "Bearer" + JSON.parse(localStorage.getItem("userData") ?? '{}').access_token.token       })     };

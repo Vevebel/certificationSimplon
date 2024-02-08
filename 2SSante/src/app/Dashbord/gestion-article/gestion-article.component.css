@@ -27,10 +27,11 @@ border: 3px solid;
 }
 .carteArticle{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr ;
   margin-top: 5vh;
   gap: 5vh;
 }
+
 main{
   width: 100%;
   margin-left: 10%;
@@ -39,4 +40,15 @@ main{
   width: 70%;
   margin: 2% auto;
   /* border: 1px solid red; */
+}
+.taileCart{
+  height: 50vh;
+}
+.corpsCart{
+  height: 40vh;
+}
+.ajout{
+  background-color: #CE0033;
+  color: #ffffff;
+  border-radius: 20px;
 }

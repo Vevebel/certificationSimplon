@@ -13,7 +13,7 @@
       <!-- </button> -->
     </div>
   <div>
-    <div class="container" id="contenudesservice">
+    <!-- <div class="container" id="contenudesservice">
       <div class="row" id="service">
         <div class="" *ngFor="let article of articles">
           <div class="card border-0 ">
@@ -30,7 +30,18 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+    <div class="carteArticle">
+      <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let article of articles">
+        <div class="card imgCard" style="width: 18rem;">
+          <img src="http://127.0.0.1:8000/storage/{{ article.image }}" class="card-img-top" alt="..." id="imagecard">
+          <div class="card-body">
+            <h5 class="card-title">{{ article.titre }}</h5>
+            <p class="card-text">{{ article.description }}</p>
 
+          </div>
+        </div>
+      </div>
+    </div>
 
 <div>

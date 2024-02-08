@@ -10,5 +10,6 @@ export class Article {
   updatedAt!: string;
   createdBy!: string;
   updatedBy!: string;
+  titre: any;
 // titreDomaine: any;
 }

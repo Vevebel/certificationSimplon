@@ -22,8 +22,48 @@ margin-bottom: 10vh;
   display: grid;
   grid-template-columns: 50% 50%;
   gap: 5vh;
-  border: 4px solid #ff2fff;
+  /* border: 4px solid #ff2fff; */
 }
-.partieFoto{
+/* .partieFoto{
 
+} */
+
+.posiInput{
+  border: 2px solid #CE0033;
+  border-radius: 20px;
+  height: 7vh;
+  gap: 4vh;
+}
+.forRdv{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap:3vh;
+}
+.descrip{
+  border: 2px solid #CE0033  !important;
+
+}
+
+
+@media screen and (max-width: 768px) {
+  .rectangle,
+  .imgRv {
+    height: 40vh;
+    width: 70vw;
+  }
+
+  .emplacementIMg {
+    margin-top: -33vh;
+    margin-left: 5vw;
+  }
+
+  .rendezVousA {
+    grid-template-columns: 1fr ;
+  }
+
+  .forRdv{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap:3vh;
+  }
 }
