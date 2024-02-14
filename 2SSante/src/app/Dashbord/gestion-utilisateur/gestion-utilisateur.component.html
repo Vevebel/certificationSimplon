@@ -1,0 +1,299 @@
+<app-sidebar-conttout></app-sidebar-conttout>
+<app-navbar-conttout></app-navbar-conttout>
+<div class="contenu">
+  <main>
+    <table datatable [dtOptions]="dtOptions" class="row-border w-100 table hover" *ngIf="Users.length>0" >
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom complet</th>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Action</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let itemUser of Users">
+          <td>{{ itemUser.id }}</td>
+          <td>{{ itemUser.nom }}</td>
+          <td>{{ itemUser.role }}</td>
+          <td>{{ itemUser.email }}</td>
+          <td>{{ itemUser.telephone }}</td>
+          <td> <button>Détails</button>
+              <button>Etat</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table datatable [dtOptions]="dtOptions" class="row-border w-100 table hover" *ngIf="Users.length<0" >
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom complet</th>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Action</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Accune données disponible</td>
+
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- <div class="content-wrapper">
+      <div class="">
+        <h2 class="card-title text-center">Liste des utilisateurs</h2>
+        <div class="row my-5 tab">
+          <div class="col-lg-12 d-flex grid-margin stretch-card tabItem">
+            <div class="card tabCard w-100">
+              <div class="card-body tardTab">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead >
+                      <tr class="trHead">
+                        <td class="">Nom</td>
+                        <td class="">Prénom</td>
+                        <td class="">Numéro</td>
+                        <td class="">Username</td>
+                        <td class="">Rôle</td>
+                        <td class="">Action</td>
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr class="tableBody">
+                        <td>
+                          <div>FALL</div>
+                        </td>
+                        <td>
+                          <div>Amadem</div>
+                        </td>
+                        <td>
+                          <div>77 777 77 77</div>
+                        </td>
+                        <td>
+                          <div>sasuke</div>
+                        </td>
+                        <td>
+                          <div>Mentor</div>
+                        </td>
+                        <td>
+                          <div>
+                            <i class="fa-solid fa-eye me-3" style="color: #CE0033;" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            <i class="fa-solid fa-pen me-3" style="color: #CE0033;"></i>
+                            <i class="fa-solid fa-ban me-3" style="color: #CE0033;"></i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="tableBody">
+                        <td>
+                          <div>DIATTA</div>
+                        </td>
+                        <td>
+                          <div>Véronique</div>
+                        </td>
+                        <td>
+                          <div>77 777 77 78</div>
+                        </td>
+                        <td>
+                          <div>nikagege</div>
+                        </td>
+                        <td>
+                          <div>Mentor</div>
+                        </td>
+                        <td>
+                          <div>
+                            <i class="fa-solid fa-eye me-3" style="color: #E68513;" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            <i class="fa-solid fa-pen me-3" style="color: #E68513;"></i>
+                            <i class="fa-solid fa-ban me-3" style="color: #E68513;"></i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="tableBody">
+                        <td>
+                          <div>DIOUF</div>
+                        </td>
+                        <td>
+                          <div>Astou</div>
+                        </td>
+                        <td>
+                          <div>77 777 77 79</div>
+                        </td>
+                        <td>
+                          <div>ayoudiouf</div>
+                        </td>
+                        <td>
+                          <div>Mentoré</div>
+                        </td>
+                        <td>
+                          <div>
+                            <i class="fa-solid fa-eye me-3" style="color: #E68513;" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            <i class="fa-solid fa-pen me-3" style="color: #E68513;"></i>
+                            <i class="fa-solid fa-ban me-3" style="color: #E68513;"></i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="tableBody">
+                        <td>
+                          <div>DIOUF</div>
+                        </td>
+                        <td>
+                          <div>Astou</div>
+                        </td>
+                        <td>
+                          <div>77 777 77 79</div>
+                        </td>
+                        <td>
+                          <div>ayoudiouf</div>
+                        </td>
+                        <td>
+                          <div>Mentoré</div>
+                        </td>
+                        <td>
+                          <div>
+                            <i class="fa-solid fa-eye me-3" style="color: #E68513;" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            <i class="fa-solid fa-pen me-3" style="color: #E68513;"></i>
+                            <i class="fa-solid fa-ban me-3" style="color: #E68513;"></i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="tableBody">
+                        <td>
+                          <div>DIOUF</div>
+                        </td>
+                        <td>
+                          <div>Astou</div>
+                        </td>
+                        <td>
+                          <div>77 777 77 79</div>
+                        </td>
+                        <td>
+                          <div>ayoudiouf</div>
+                        </td>
+                        <td>
+                          <div>Mentoré</div>
+                        </td>
+                        <td>
+                          <div>
+                            <i class="fa-solid fa-eye me-3" style="color: #E68513;" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            <i class="fa-solid fa-pen me-3" style="color: #E68513;"></i>
+                            <i class="fa-solid fa-ban me-3" style="color: #E68513;"></i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="tableBody">
+                        <td>
+                          <div>DIOUF</div>
+                        </td>
+                        <td>
+                          <div>Astou</div>
+                        </td>
+                        <td>
+                          <div>77 777 77 79</div>
+                        </td>
+                        <td>
+                          <div>ayoudiouf</div>
+                        </td>
+                        <td>
+                          <div>Mentoré</div>
+                        </td>
+                        <td>
+                          <div>
+                            <i class="fa-solid fa-eye me-3" style="color: #E68513;" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            <i class="fa-solid fa-pen me-3" style="color: #E68513;"></i>
+                            <i class="fa-solid fa-ban me-3" style="color: #E68513;"></i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="tableBody">
+                        <td>
+                          <div>DIOUF</div>
+                        </td>
+                        <td>
+                          <div>Astou</div>
+                        </td>
+                        <td>
+                          <div>77 777 77 79</div>
+                        </td>
+                        <td>
+                          <div>ayoudiouf</div>
+                        </td>
+                        <td>
+                          <div>Mentoré</div>
+                        </td>
+                        <td>
+                          <div>
+                            <i class="fa-solid fa-eye me-3" style="color: #CE0033;" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            <i class="fa-solid fa-pen me-3" style="color: #CE0033;"></i>
+                            <i class="fa-solid fa-ban me-3" style="color: #CE0033;"></i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="tableBody">
+                        <td>
+                          <div>DIOUF</div>
+                        </td>
+                        <td>
+                          <div>Astou</div>
+                        </td>
+                        <td>
+                          <div>77 777 77 79</div>
+                        </td>
+                        <td>
+                          <div>ayoudiouf</div>
+                        </td>
+                        <td>
+                          <div>Mentoré</div>
+                        </td>
+                        <td>
+                          <div>
+                            <i class="fa-solid fa-eye me-3" style="color: #CE0033;" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            <i class="fa-solid fa-pen me-3" style="color: #CE0033;"></i>
+                            <i class="fa-solid fa-ban me-3" style="color: #CE0033;"></i>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="tableBody">
+                        <td>
+                          <div>DIOUF</div>
+                        </td>
+                        <td>
+                          <div>Astou</div>
+                        </td>
+                        <td>
+                          <div>77 777 77 79</div>
+                        </td>
+                        <td>
+                          <div>ayoudiouf</div>
+                        </td>
+                        <td>
+                          <div>Mentoré</div>
+                        </td>
+                        <td>
+                          <div>
+                            <i class="fa-solid fa-eye me-3" style="color: #CE0033;" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            <i class="fa-solid fa-pen me-3" style="color: #CE0033;"></i>
+                            <i class="fa-solid fa-ban me-3" style="color: #CE0033;"></i>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </div> -->
+  </main>
+</div>
+
