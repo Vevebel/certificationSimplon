@@ -18,8 +18,8 @@ email!: string;
 password!: string;
 telephone!: string;
 image?: File;
-role_id!: number; //(clé étrangère vers le modèle de rôle)
-ville_id!: number; //(clé étrangère vers le modèle de ville)
+role!: number; //(clé étrangère vers le modèle de rôle)
+ville!: number; //(clé étrangère vers le modèle de ville)
 genre!: string ;//('homme' ou 'femme')
 createdAt!: Date;
 updatedAt!: Date;

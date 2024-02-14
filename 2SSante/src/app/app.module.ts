@@ -17,7 +17,7 @@ import { DetailsArticleComponent } from './details-article/details-article.compo
 import { ContactComponent } from './contact/contact.component';
 import { PriseRdvComponent } from './prise-rdv/prise-rdv.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { DataService } from './servicesSRNRV/data.service';
 // import { LitesArticleComponent } from './lites-articleOld/lites-article.component';
@@ -39,6 +39,8 @@ import { ListeConsultationComponent } from './Dashbord/liste-consultation/liste-
 import { ListeRDVEnAttenteComponent } from './Dashbord/liste-rdven-attente/liste-rdven-attente.component';
 import { HistoriqueDesRVComponent } from './Dashbord/historique-des-rv/historique-des-rv.component';
 import { MesMedecinComponent } from './Dashbord/mes-medecin/mes-medecin.component';
+import { AuthentificationService } from './servicesSRNRV/authentification.service';
+import { AuthInterceptor } from './interceptors/interceptors';
 // import { TokenInterceptorProvider } from './token.interceptor';
 
 @NgModule({
@@ -87,8 +89,14 @@ import { MesMedecinComponent } from './Dashbord/mes-medecin/mes-medecin.componen
 
   ],
   providers: [
-    DataService,
-    ArticleService,
+    // DataService,
+    // ArticleService,
+    AuthentificationService,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
     // TokenInterceptorProvider
   ],
   bootstrap: [AppComponent]

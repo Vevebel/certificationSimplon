@@ -23,7 +23,7 @@ export class GestionArticleComponent  implements OnInit {
 
   // liste article
   articles:any;
-
+  listeArticle: any[]=[];
 
   constructor(
      private authentification : AuthentificationService,
@@ -39,10 +39,10 @@ export class GestionArticleComponent  implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getArticle();
-    let user = JSON.parse(localStorage.getItem("userData") || "")
-    console.log(user);
-    console.log(JSON.parse(localStorage.getItem("userData") ?? '{}').access_token.token )
+    // this.getArticle();
+    // let user = JSON.parse(localStorage.getItem("token") || "")
+    // console.log(user);
+    // console.log(JSON.parse(localStorage.getItem("token") ?? '{}').access_token )
     // this.filteredProduit=this.tabListProduit
     // this.modifierArticle();
     // this.ajout();
@@ -82,25 +82,37 @@ export class GestionArticleComponent  implements OnInit {
   // lister  produits
   listerDesArticles() {
     // console.log(this.tabListProduit);
-    this.articleService.getArticle().subscribe((data) => {
-      console.log('listeArticle', data);
-      this.articles= data.Articles;
-      console.log("new data",data.Articles);
+    this.articleService.getArticle().subscribe((response) => {
+      console.log('listeArticle',response );
+      this.articles= response.Articles;
+      console.log("new data",this.articles);
     });
   }
+
+  // listerDesArticles() {
+  //   console.log(this.listeArticle);
+  //   this.articleService.getArticle().subscribe(
+  //     (responses) => {
+  //       console.log(responses);
+
+  //       this.listeArticle = responses.articles;
+  //       console.log(responses.articles);
+  //     }
+  //   )
+  // }
 
   // categorie_id: this.categorie_id,
 
   //  pour recuperer un produit
-  articleSelectionner: any = {};
+  // articleSelectionner: any = {};
 
-  getArticle() {
-    this.articleService.getArticle().subscribe((reponse:any)=>{
-      console.log(reponse.Articles.data);
-      this.articles=reponse.Articles.data;
-      console.log(this.articles)
-    })
-  }
+  // getArticle() {
+  //   this.articleService.getArticle().subscribe((reponse:any)=>{
+  //     console.log(reponse);
+  //     this.articles=reponse.article.data;
+  //     console.log(this.articles)
+  //   })
+  // }
 
   // fonction pour modifier
   //  variable
@@ -110,10 +122,13 @@ export class GestionArticleComponent  implements OnInit {
     let formData = new FormData();
       formData.append('titre', this.titre,);
       formData.append('image', this.image,);
+      console.log('image', this.image);
+
       formData.append('description', this.description,);
     this.articleService.updateArticle(this.id, formData).subscribe((response) => {
         console.log('modifArticle', response);
         this.listerDesArticles();
+        this.viderChamps();
 
       });
       // this.ngOnInit();
@@ -135,7 +150,7 @@ export class GestionArticleComponent  implements OnInit {
 
   // methode pour supprimer
 
-  supprimerArticle(id:number){
+  supprimerArticle(id:number): void{
 
     Swal.fire({
       title: "Etes-vous sur???",
@@ -152,7 +167,19 @@ export class GestionArticleComponent  implements OnInit {
         });
       }
     });
-}
+
+    // supprimerArticle(id: number): void {
+    //   this.articleService.deleteArticle(id)
+    //     .subscribe(() => {
+    //       // Supprimer l'article de la liste
+    //       this.articles = this.articles.filter(article => article.id !== id);
+    //     });
+    // }
+  }
+
+
+
+
   //Pour faire la recherche
   filterValue = '';
   filteredArticle: any;

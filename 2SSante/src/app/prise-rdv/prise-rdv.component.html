@@ -25,26 +25,40 @@
           <input type="tel" class="posiInput" name="telephone" required><br>
         </div>
         <div>
-          <label>Type de rendez-vous</label><br>
-          <input type="tel" class="posiInput" name="telephone" required><br>
-        </div>
+          <label for="typeRendezVous">Type de rendez-vous</label><br>
+          <!-- <select class="posiInput" name="typeRendezVous" [(ngModel)]="rendezVous.typeRendezVous" required>
+              <option value="" disabled selected>Choisir le type de rendez-vous</option>
+              <option value="en_ligne">En ligne</option>
+              <option value="physique">Physique</option>
+          </select> -->
+      </div>
+
         <div>
           <label>Date:</label><br>
-          <input type="tel" class="posiInput" name="telephone" required><br>
+          <!-- <input type="date" class="posiInput" name="date" [(ngModel)]="rendezVous.date" required> -->
+
+          <!-- <input type="tel" class="posiInput" name="telephone" required><br> -->
         </div>
         <div>
           <label>Heure:</label><br>
-          <input type="tel" class="posiInput" name="telephone" required><br>
+          <!-- <input type="time" class="posiInput" name="heure" [(ngModel)]="rendezVous.heure" required> -->
+
+          <!-- <input type="tel" class="posiInput" name="telephone" required><br> -->
         </div>
       </div>
       <div class="mt-5">
         <label> Description: </label> <br>
+        <!-- <textarea class="descrip" name="description" [(ngModel)]="rendezVous.description" cols="60" rows="5" required></textarea> -->
+
         <!-- <input type="textarea"> -->
-        <textarea name="" class="descrip"  cols="60" rows="5"></textarea>
+        <!-- <textarea name="" class="descrip"  cols="60" rows="5"></textarea> -->
+      </div>
+      <div class="infoPersonnelB3 text-center" ></div>
+          <a href="" class="btn rendez-vous" [routerLink]="['/priseRV']">Prendre une rendez-vous</a>
       </div>
     </div>
     </div>
   </div>
-</div>
+<!-- </div> -->
 
 <app-footer></app-footer>

@@ -11,7 +11,7 @@ import { PolitiqueConfidentialiteComponent } from './politique-confidentialite/p
 import { ListeArticlesComponent } from './liste-articles/liste-articles.component';
 import { PriseRdvComponent } from './prise-rdv/prise-rdv.component';
 import { DetailMedecinsComponent } from './detail-medecins/detail-medecins.component';
-import { DashboardPrincipalComponent } from './dashboard-principal/dashboard-principal.component';
+// import { DashboardPrincipalComponent } from './dashboard-principal/dashboard-principal.component';
 import { DashAdminComponent } from './Dashbord/dash-admin/dash-admin.component';
 import { GestionContenueComponent } from './Dashbord/gestion-contenue/gestion-contenue.component';
 import { GestionUtilisateurComponent } from './Dashbord/gestion-utilisateur/gestion-utilisateur.component';
@@ -35,7 +35,7 @@ const routes: Routes = [
   {path : 'confidentialite', component : PolitiqueConfidentialiteComponent,},
   {path : 'login', component : AuthentificationComponent,},
   {path : 'priseRV', component : PriseRdvComponent,},
-  {path : 'detailMed', component : DetailMedecinsComponent,},
+  {path : 'detailMed/:id' , component : DetailMedecinsComponent,},
   {path : 'dashboardAdmin', component : DashAdminComponent,},
   {path : 'dashboardMed', component :DashMedecinComponent ,},
   {path : 'dashboardPatient', component :DashPatientComponent ,},
@@ -58,6 +58,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

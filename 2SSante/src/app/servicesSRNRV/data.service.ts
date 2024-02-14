@@ -51,6 +51,12 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class DataService {
+  getSecteurs_active() {
+    throw new Error('Method not implemented.');
+  }
+   getSecteurs_actives() {
+    throw new Error('Method not implemented.');
+  }
 
   url = "http://127.0.0.1:8000/api";
 
@@ -58,7 +64,7 @@ export class DataService {
 
   // Méthode de connexion
   connect(users: any): Observable<any> {
-    return this.http.post('http://127.0.0.1:8000/api/login', users);
+    return this.http.post(`http://127.0.0.1:8000/api/login`, users);
   }
 
   // Méthode pour récupérer les villes depuis une source de données
@@ -67,13 +73,13 @@ export class DataService {
     const url_villes = 'https://example.com/api/villes';
     return this.http.get<any[]>(url_villes);
   }
-    // Méthode pour récupérer les hôpitaux depuis une source de données
+  //   // Méthode pour récupérer les hôpitaux depuis une source de données
     getHopitaux(): Observable<any[]> {
       const url_hopitaux = 'https://example.com/api/hopitaux';
       return this.http.get<any[]>(url_hopitaux);
     }
 
-  // Méthode pour récupérer les secteurs spécialistes depuis une source de données
+  // // Méthode pour récupérer les secteurs spécialistes depuis une source de données
   getSecteursSpecialistes(): Observable<any[]> {
     // Remplacez 'url_secteurs' par l'URL réelle pour récupérer les secteurs spécialistes depuis votre API
     const url_secteurs = 'https://example.com/api/secteurs';

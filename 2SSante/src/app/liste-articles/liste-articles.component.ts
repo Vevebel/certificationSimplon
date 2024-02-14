@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./liste-articles.component.css']
 })
 export class ListeArticlesComponent {
-  articles: Article[] = [];
+  articles: any;
   filterValue: string = '';
   originalarticles: Article[] = [];
   errorMessage: string = "Ce article n'existe pas.";
@@ -21,31 +21,39 @@ export class ListeArticlesComponent {
     ) {}
   ngOnInit(): void {
     // this.loadarticles();
-    this.listerDesArticles();
+    this.listerDesArticlesPublie();
   }
- 
+
     // lister  produits
-    listerDesArticles() {
-      // console.log(this.tabListProduit);
-      this.articleService.getArticle().subscribe((data) => {
-        console.log('listeArticle', data);
-        this.articles= data.Articles;
-        console.log("new data",data.Articles);
+    // listerDesArticles() {
+    //   // console.log(this.tabListProduit);
+    //   this.articleService.getArticle().subscribe((data) => {
+    //     console.log('listeArticle', data);
+    //     this.articles= data.Articles;
+    //     console.log("new data",data.Articles);
+    //   });
+    // }
+
+    listerDesArticlesPublie(): void {
+    this.articleService.getAllArticles()
+    .subscribe(articles => {
+      this.articles = articles.articles;
+      console.log(this.articles);
       });
-    }
+  }
 
     // categorie_id: this.categorie_id,
 
     //  pour recuperer un produit
     articleSelectionner: any = {};
 
-    getArticle() {
-      this.articleService.getArticle().subscribe((reponse:any)=>{
-        console.log(reponse.Articles.data);
-        this.articles=reponse.Articles.data;
-        console.log(this.articles)
-      })
-    }
+    // getArticle() {
+    //   this.articleService.getArticle().subscribe((reponse:any)=>{
+    //     console.log(reponse.Articles.data);
+    //     this.articles=reponse.Articles.data;
+    //     console.log(this.articles)
+    //   })
+    // }
   onSearch() {
     if (this.filterValue.trim() === '') {
       this.articles = [...this.originalarticles];

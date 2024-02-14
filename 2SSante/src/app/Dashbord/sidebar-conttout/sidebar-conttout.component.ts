@@ -40,12 +40,12 @@ export class SidebarConttoutComponent  implements OnInit {
 
     ngOnInit(): void {
       this.userConnecte=JSON.parse(localStorage.getItem('userData') || "");
-      this.user = this.userConnecte.access_token.user;
-      if(this.user.role_id === 1){
+      console.log(this.userConnecte);
+      if(this.userConnecte.role =='admin'){
         this.ConnexionAdmin();
-      }else if(this.user.role_id ===2){
+      }else if(this.userConnecte.role =='medecin'){
         this.ConnexionMedecin();
-      }else if(this.user.role_id ===3){
+      }else if(this.userConnecte.role =='patient'){
         this.ConnexionPatient();
       }
     }

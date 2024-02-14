@@ -43,6 +43,17 @@ margin-bottom: 10vh;
   border: 2px solid #CE0033  !important;
 
 }
+.rendez-vous{
+  border-radius: 15px;
+  border: 2px solid #CE0033;
+  color: #CE0033;
+  font-weight: bold;
+}
+ .infoPersonnelB3{
+  margin-top: 5vh;
+  /* margin-bottom: 5vh; */
+
+}
 
 
 @media screen and (max-width: 768px) {

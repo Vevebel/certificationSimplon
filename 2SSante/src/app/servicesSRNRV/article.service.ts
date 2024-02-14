@@ -22,30 +22,21 @@ import { baseUrl } from './api-url.service';
 })
 export class ArticleService {
   [x: string]: any;
-  getArticlesGestion() {
-    throw new Error('Method not implemented.');
-  }
+  // getArticlesGestion() {
+  //   throw new Error('Method not implemented.');
+  // }
   // ajouterArticle(nouvelArticle: { nomarticle: string; description: string; }) {
   //   throw new Error('Method not implemented.');
   // }
   constructor(private http: HttpClient) {}
   // modification et la suppression d'articles
   ajoutArticle(formData: FormData): Observable<any> {
-    const httpOptions = {       headers: new HttpHeaders({
-      Authorization: "Bearer" + JSON.parse(localStorage.getItem("userData") ??
-      '{}').access_token.token       })     };
-    return this.http.post(`${baseUrl}/article`, formData,httpOptions);
+    return this.http.post(`${baseUrl}/article`, formData);
   }
 
 // modifier produit
 updateArticle(id: number, articles:any): Observable<any> {
-
-  const httpOptions = {       headers: new HttpHeaders({
-    Authorization: "Bearer" + JSON.parse(localStorage.getItem("userData") ??
-    '{}').access_token.token       })     };
-
-
-    return this.http.post(`${baseUrl}/update-article/${id}`, articles, httpOptions);
+    return this.http.post(`${baseUrl}/update-article/${id}`, articles);
   }
   // const accessToken = localStorage.getItem('userData');
   //   return accessToken ?
@@ -54,11 +45,27 @@ updateArticle(id: number, articles:any): Observable<any> {
   //   }) : of(null);}
 
   deleteArticle(id: number): Observable<any> {
-    const httpOptions = {       headers: new HttpHeaders({         Authorization: "Bearer" + JSON.parse(localStorage.getItem("userData") ?? '{}').access_token.token       })     };
-    return this.http.delete(`${baseUrl}/articles/${id}`);
+    return this.http.delete(`${baseUrl}/article/${id}`);
   }
   getArticle(): Observable<any> {
-    const httpOptions = {       headers: new HttpHeaders({         Authorization: "Bearer" + JSON.parse(localStorage.getItem("userData") ?? '{}').access_token.token   })     };
-    return this.http.get<any>(`${baseUrl}/article`, httpOptions);
+    return this.http.get<any>(`${baseUrl}/article`);
   }
+  // getArticle(): Observable<any> {
+  //   const accessToken = localStorage.getItem('access_token.token');
+
+  //     return accessToken ?
+  //     this.http.get<any>(`${baseUrl}/article`,  {
+  //         headers: new HttpHeaders({ 'Authorization': `Bearer ${accessToken}` })
+  //       }) : of(null);
+  // }
+// article.service.ts
+
+  getAllArticles(): Observable<any> {
+    // return this.http.get<Article[]>(this.baseUrl);
+    return this.http.get<any>(`${baseUrl}/home`);
+  }
+
 }
+
+
+

@@ -1,8 +1,12 @@
+import { secteur_activite } from './../modelSRS/typesVHS';
+import { hopital } from './../modelSRS/hopital';
+import { ville } from './../modelSRS/ville';
 import { AuthentificationService } from './../servicesSRNRV/authentification.service';
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../servicesSRNRV/data.service';
+// import { DataService } from '../servicesSRNRV/data.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { DataService } from '../servicesSRNRV/data.service';
 
 @Component({
   selector: 'app-authentification',
@@ -20,19 +24,25 @@ export class AuthentificationComponent implements OnInit{
   telephone: string = '';
   genre: string = '';
   role_id: number = 0;
-  ville: string = '';
-  secteur_activite: string = '';
+  ville: Number = 0;
+  secteur_activites: string = '';
   hopital: string = '';
   poids: number = 0;
   age: number = 0;
   showConnexion: boolean = true;
   titleFrm: string = ''; // Ajout de la propriété titleFrm
-  villes: any;
-  hopitaux: any;
-  secteursSpecialistes: any;
-   // Variable booléenne pour contrôler l'affichage du pop-up
-  //  showRolePopup: boolean = false;
+  // villes: any;
+  // hopitaux: any;
+  // secteur_actives: any;
 
+
+  // villes: any[];
+  // hopitals: any[];
+  // secteurs_activites:
+  // any[];
+  villes: any;
+  hopitals: any;
+  secteur_activite: any;
 
   // Inscription du patient ou du medecin
   // Les variables
@@ -42,16 +52,6 @@ export class AuthentificationComponent implements OnInit{
   tabUsers: any;
   router: any;
 
-  // Les fonctions
-  // inscriptionMedecin(){
-  //   this.isPatient = false;
-  //   this.isMedecin = true;
-  // }
-
-  // inscriptionPatient(){
-  //   this.isPatient = true;
-  //   this.isMedecin = false;
-  // }
   // Variables pour faire la vérifications
   verifNom : string  =  "";
   verifPrenom : string = "";
@@ -88,26 +88,64 @@ export class AuthentificationComponent implements OnInit{
   // Variables Si les valeurs sont exactes
   exactEmailCon : boolean = false;
   exactPasswordCon : boolean = false;
-  constructor(private dataService: DataService , private authservice:AuthentificationService, private route:Router) {}
+
+  userConnected: string = ""
+
+
+  // constructor(private dataService: DataService, private authservice: AuthentificationService, private route: Router) {}
+constructor( private dataservice:DataService, private authservice: AuthentificationService, private route: Router) {}
+
+  // constructor(private dataService: DataService , private authservice:AuthentificationService, private route:Router) {}
 
   ngOnInit(): void {
-    console.log(this.dataService)
+    console.log(this.dataservice)
     if(!localStorage.getItem("userDAta")){
       // const userDataJSON = JSON.stringify(userData);
-      localStorage.setItem('userData', JSON.stringify(this.dataService));
+      localStorage.setItem('userData', JSON.stringify(this.userConnected));
     }
-    // this.resetFields();
-    this.dataService.getVilles().subscribe((villes: any) => {
+    this.resetFields();
+    this.dataservice.getVilles().subscribe((villes: any) => {
       this.villes = villes;
     });
 
-    this.dataService.getHopitaux().subscribe((hopitaux: any) => {
-      this.hopitaux = hopitaux;
+    this.dataservice.getHopitaux().subscribe((hopitaux: any) => {
+      this.hopitals = hopitaux;
     });
 
-    this.dataService.getSecteursSpecialistes().subscribe((secteurs: any) => {
-      this.secteursSpecialistes = secteurs;
+    console.log("Les spécialistes")
+    // this.loadSpecialites();
+    this.loadVilles();
+    this.loadHopitaux();
+    this.loadSecteursActivites();
+   }
+
+  loadVilles(): void {
+    this.authservice.getVilles().subscribe((ville: any[]) => {
+      this.villes = ville;
+      this.villes = this.villes.villes;
+      console.log("Les villes");
+      console.log(ville);
+
     });
+  }
+
+  loadHopitaux(): void {
+    this.authservice.getHopitaux().subscribe((hopitaux: any[]) => {
+      this.hopitals = hopitaux;
+      this.hopitals=this.hopitals.hopitals;
+      console.log(this.hopitals);
+
+    });
+  }
+
+  loadSecteursActivites():void {
+    this.authservice.getSecteurs_actives().subscribe((secteurs: any[]) => {
+      this.secteur_activite = secteurs;
+      this.secteur_activite=this.secteur_activite.secteur_actives;
+      console.log(this.secteur_activite);
+
+    });
+    // });
   }
 
   afficherFrmConnexion() {
@@ -122,118 +160,7 @@ export class AuthentificationComponent implements OnInit{
 
     // Vous pouvez implémenter des actions en fonction du rôle sélectionné ici
   }
-  // inscription() {
-  //   // Implémentez la logique d'inscription ici
-  //   console.log('Méthode inscription() appelée.');
 
-  //   // inscription() {
-  //     // Création de l'objet représentant l'utilisateur à inscrire
-  //     const userData = {
-  //       nom: this.nom,
-  //       email: this.email,
-  //       password: this.password,
-  //       telephone: this.telephone,
-  //       genre: this.genre,
-  //       role_id: this.role_id,
-  //       ville: this.ville,
-  //       secteur_activite: this.secteur_activite,
-  //       hopital: this.hopital,
-  //       poids: this.poids,
-  //       age: this.age,
-  //       statut: 'en_attente',
-  //     };
-
-  //     // Appel du service d'authentification pour l'inscription du médecin
-  //   this.authservice.inscriptionMedecin(userData).subscribe(
-  //     (response: any) => {
-  //         console.log(response);
-  //         if (response.success) {
-  //             // Gérer l'inscription réussie du médecin
-  //             this.verifierChamps("Inscription réussie!", "", "success");
-  //             this.resetFields();
-  //         } else {
-  //             // Gérer les cas où l'inscription du médecin a échoué
-  //             this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
-  //         }
-  //     },
-  //     (error: any) => {
-  //         console.error("Erreur lors de l'inscription du médecin :", error);
-  //     }
-  // );
-
-  // // Appel du service d'authentification pour l'inscription du patient
-  // this.authservice.inscriptionPatient(userData).subscribe(
-  //     (response: any) => {
-  //         console.log(response);
-  //         if (response.success) {
-  //             // Gérer l'inscription réussie du patient
-  //             this.verifierChamps("Inscription réussie!", "", "success");
-  //             this.resetFields();
-  //         } else {
-  //             // Gérer les cas où l'inscription du patient a échoué
-  //             this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
-  //         }
-  //     },
-  //     (error: any) => {
-  //         console.error("Erreur lors de l'inscription du patient :", error);
-  //     }
-  // );
-  //     // Appel du service d'authentification pour l'inscription
-  //     // this.authservice.inscriptionMedecin(userData).subscribe(
-  //     //   (response: any) => {
-  //     //     console.log(response);
-  //     //     if (response.success) {
-  //     //       // Gérer l'inscription réussie du patient
-  //     //       this.verifierChamps("Inscription réussie!", "", "success");
-  //     //       this.resetFields();
-  //     //     } else {
-  //     //       // Gérer les cas où l'inscription du patient a échoué
-  //     //       this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
-  //     //     }
-  //     //     // Gérer la réponse réussie, par exemple, afficher un message de succès
-  //     //     // Réinitialiser les champs du formulaire après une inscription réussie
-  //     //     // this.verifierChamps("Inscription réussie!", "", "success");
-  //     //     // this.resetFields();
-  //     //   },
-  //     //   (error: any) => {
-  //     //   //   console.log(error);
-  //     //   //   // Gérer les erreurs, par exemple, afficher un message d'erreur à l'utilisateur
-  //     //   //   this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
-  //     //   // }
-  //     //   console.error("Erreur lors de l'inscription du médecin :", error);
-
-  //     //   }
-  //     // );
-  //     // this.authservice.inscriptionPatient(userData).subscribe(
-  //     //   (response: any) => {
-  //     //     console.log(response);
-  //     //     if (response.success) {
-  //     //       // Gérer l'inscription réussie du patient
-  //     //       this.verifierChamps("Inscription réussie!", "", "success");
-  //     //       this.resetFields();
-  //     //     } else {
-  //     //       // Gérer les cas où l'inscription du patient a échoué
-  //     //       this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
-  //     //     }
-  //     //     // Gérer la réponse réussie, par exemple, afficher un message de succès
-  //     //     // Réinitialiser les champs du formulaire après une inscription réussie
-  //     //     // this.verifierChamps("Inscription réussie!", "", "success");
-  //     //     // this.resetFields();
-  //     //   },
-  //     //   (error: any) => {
-  //     //     console.error("Erreur lors de l'inscription du patient :", error);
-
-  //     //     // console.log(error);
-  //     //     // Gérer les erreurs, par exemple, afficher un message d'erreur à l'utilisateur
-  //     //     // this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
-  //     //   }
-  //     // );
-  //   // }
-
-
-  //   // const userdataI
-
-  // }
 
   inscriptionMedecin() {
     // Création de l'objet représentant l'utilisateur à inscrire
@@ -241,41 +168,39 @@ export class AuthentificationComponent implements OnInit{
         nom: this.nom,
         email: this.email,
         password: this.password,
+        password_confirmation:this.passwordConf,
         telephone: this.telephone,
         genre: this.genre,
         role_id: this.role_id,
-        ville: this.ville,
-        secteur_activite: this.secteur_activite,
-        hopital: this.hopital,
-        poids: this.poids,
-        age: this.age,
+        ville_id: this.ville,
+        secteur_activite_id: this.secteur_activite,
+        hopital_id: this.hopital,
+        // poids: this.poids,
+        // age: this.age,
         statut: 'en_attente',
     };
     // inscriptionMedecin(){
       this.isPatient = false;
       this.isMedecin = true;
-    // }
 
-    // inscriptionPatient(){
-    //   this.isPatient = true;
-    //   this.isMedecin = false;
-    // }
     // Appel du service d'authentification pour l'inscription du médecin
     this.authservice.inscriptionMedecin(userData).subscribe(
         (response: any) => {
             console.log(response);
             if (response.success) {
                 // Gérer l'inscription réussie du médecin
-                this.verifierChamps("Inscription réussie!", "", "success");
+                this.verifierChamps("Inscription réussie! , Votre compte sera actif dans 24H", "", "success");
                 this.resetFields();
             } else {
                 // Gérer les cas où l'inscription du médecin a échoué
-                this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
+                this.verifierChamps("Inscription réussie! , Votre compte sera actif dans 24H", "", "success",);
+                this.resetFields();
             }
         },
         (error: any) => {
             console.error("Erreur lors de l'inscription du médecin :", error);
-        }
+           this.resetFields();
+          }
     );
 }
 
@@ -285,20 +210,18 @@ inscriptionPatient() {
         nom: this.nom,
         email: this.email,
         password: this.password,
+        password_confirmation:this.passwordConf,
         telephone: this.telephone,
         genre: this.genre,
         role_id: this.role_id,
-        ville: this.ville,
-        secteur_activite: this.secteur_activite,
-        hopital: this.hopital,
-        poids: this.poids,
-        age: this.age,
-        statut: 'en_attente',
+        ville_id: this.ville,
+        // secteur_active_id: this.secteur_activite,
+        // hopital_id: this.hopital,
+        // poids: this.poids,
+        // age: this.age,
+        // statut: 'en_attente',
     };
-    // inscriptionMedecin(){
-    //   this.isPatient = false;
-    //   this.isMedecin = true;
-    // }
+
 
     // inscriptionPatient(){
       this.isPatient = true;
@@ -314,7 +237,8 @@ inscriptionPatient() {
                 this.resetFields();
             } else {
                 // Gérer les cas où l'inscription du patient a échoué
-                this.verifierChamps("Erreur lors de l'inscription", "Veuillez réessayer plus tard", "error");
+                this.verifierChamps("Inscription réussie!", "", "success");
+                this.resetFields();
             }
         },
         (error: any) => {
@@ -341,25 +265,43 @@ inscription() {
       email: this.email,
       password: this.password,
 
-
     };
     this.authservice.connexion(userData).subscribe(
       (response:any) => {
         console.log( response);
         const userDataJSON = JSON.stringify(response);
-        localStorage.setItem('userData', userDataJSON);
-        this.resetFields();
-        this.authservice.setToken(response.access_token.token)
-        if(response.access_token.user.role_id===1){
-          this.route.navigate(['/dashboardAdmin']);
-        }else if(response.access_token.user.role_id===2){
-          this.route.navigate(['/dashboardMed']);
+        let tokenC = response.access_token.token;
+        let user = response.access_token.user;
+        this.authservice.setToken(tokenC);
+        // localStorage.setItem('token', response.acces_token.token)
+        // On met à jour le localstorage en lui donnant les infos de l'utilisateur connecté
+        localStorage.setItem('userData', JSON.stringify(user));
+        // console.log(response.access_token.token
+        //   );
 
-        }else if(response.access_token.user.role_id===3){
+        // localStorage.setItem('userData', userDataJSON);
+        // this.resetFields();
+        // this.authservice.setToken(response.access_token.access_token.token)
+        if(user.role=='admin'){
+          // alert('admin')
+          this.route.navigate(['/dashboardAdmin']);
+           this.verifierChamps("Connexion réussie!", "", "success");
+                this.resetFields();
+        }else if(user.role=='medecin'){
+          this.route.navigate(['/dashboardMed']);
+          this.verifierChamps("Connexion réussie!", "", "success");
+          this.resetFields();
+          // alert('medecin')
+
+        }else if(user.role=='patient'){
           this.route.navigate(['/dashboardPatient']);
+          this.verifierChamps("Connexion réussie!", "", "success");
+          this.resetFields();
+          // alert('patient')
         } else {
           // Redirection par défaut
-          this.router.navigate(['/default-page']);
+          this.route.navigate(['/accueil']);
+          // alert('aucun')
         }
       },
       (error:any) =>{
@@ -376,7 +318,7 @@ inscription() {
     this.telephone = '';
     this.genre = '';
     this.role_id = 0;
-    this.ville = '';
+    this.ville = 0;
     this.secteur_activite = '';
     this.hopital = '';
     this.poids = 0;
@@ -390,9 +332,6 @@ inscription() {
     }
   }
 
-  // inscription() {
-  //   // Logique d'inscription
-  // }
 
   annulerInscription() {
     Swal.fire({
@@ -425,7 +364,7 @@ inscription() {
     if(this.nom == ""){
       this.verifNom = "Veuillez renseigner votre nom";
     }
-    else if (this.nom.length < 2 ){
+    else if (this.nom.length < 4 ){
       this.verifNom = "Le nom est trop court";
     }
     else {
@@ -590,10 +529,7 @@ inscription() {
 
 
 
-  // resetFields() {
-  //   // Réinitialisation des champs
-  // }
-
 }
+
 
 
