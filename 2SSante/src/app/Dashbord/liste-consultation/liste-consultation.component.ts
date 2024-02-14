@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./liste-consultation.component.css']
 })
 export class ListeConsultationComponent {
+ // Declare jourSemaine property
+//  jourSemaine: string;
 
+ constructor() { }
 }
