@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MedecinService } from '../servicesSRNRV/medecin.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detail-medecins',
@@ -43,6 +44,32 @@ export class DetailMedecinsComponent {
       //       this.medecins = medecin;
       //       console.log(this.medecins);
       //       });
+  }
+  prendreRendezVous(): void {
+    // Vérifier si le patient est connecté
+    const patientConnecte = false; // Vous devez implémenter la logique pour vérifier si le patient est connecté
+
+    if (!patientConnecte) {
+      // Afficher un Sweet Alert pour demander au patient de se connecter
+      Swal.fire({
+        icon: 'warning',
+        title: 'Vous devez vous connecter',
+        text: 'Veuillez vous connecter pour prendre un rendez-vous',
+        showCancelButton: true,
+        confirmButtonText: 'Se connecter',
+        cancelButtonText: 'Annuler',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Rediriger vers la page de connexion
+          // Remplacez '/connexion' par le chemin de votre page de connexion
+          window.location.href = '/connexion';
+        }
+      });
+    } else {
+      // Le patient est connecté, rediriger vers la page de prise de rendez-vous
+      // Remplacez '/priseRV' par le chemin de votre page de prise de rendez-vous
+      // window.location.href = '/priseRV';
+    }
   }
 
 }

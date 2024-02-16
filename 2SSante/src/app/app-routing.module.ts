@@ -1,3 +1,4 @@
+import { CalendrierPlannificationComponent } from './Dashbord/calendrier-plannification/calendrier-plannification.component';
 import { DashPatientComponent } from './Dashbord/dash-patient/dash-patient.component';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { NgModule } from '@angular/core';
@@ -23,6 +24,8 @@ import { ListeRDVEnAttenteComponent } from './Dashbord/liste-rdven-attente/liste
 import { HistoriqueDesRVComponent } from './Dashbord/historique-des-rv/historique-des-rv.component';
 import { MesMedecinComponent } from './Dashbord/mes-medecin/mes-medecin.component';
 import { DashMedecinComponent } from './Dashbord/dash-medecin/dash-medecin.component';
+import { PlanningDuMedecinComponent } from './Dashbord/planning-du-medecin/planning-du-medecin.component';
+import { RendezVousPatientComponent } from './Dashbord/rendez-vous-patient/rendez-vous-patient.component';
 // import { AuthentificationComponent } from './AuthentificationComponent/authentification.component';
 
 const routes: Routes = [
@@ -48,9 +51,9 @@ const routes: Routes = [
   {path : 'rendezVousAttente', component : ListeRDVEnAttenteComponent,},
   {path : 'historique', component :HistoriqueDesRVComponent ,},
   {path : 'MesMedicin', component : MesMedecinComponent,},
-  // {path : '', component : ,},
-  // {path : '', component : ,},
-  // {path : '', component : ,},
+  {path : 'planning', component : PlanningDuMedecinComponent,},
+  {path : 'consultationPatient', component : RendezVousPatientComponent,},
+  {path : 'priseConsultation/:id', component : CalendrierPlannificationComponent,},
   // {path : '', component : ,},
   // {path : '', component : ,},
   // {path : '', component : ,},

@@ -1,0 +1,60 @@
+<app-sidebar-conttout></app-sidebar-conttout>
+<app-navbar-conttout></app-navbar-conttout>
+<div class="contenu">
+  <main>
+    <div class="container">
+      <div class="rendezVous">
+        <div>
+          <h2 class="text-center">Prendre un rendez-vous</h2>
+          <div class="container rendezVousA"  >
+            <div class="partieFoto mt-5">
+              <div class="rectangle">
+              </div>
+              <div  class="emplacementIMg">
+                <img src="../../assets/profildoctor.png" alt="" class="imgRv">
+              </div>
+            </div>
+          <div class="mt-5">
+            <div class="forRdv mt-5">
+              <div class="" >
+                <label>DATE</label><br>
+                <input type="text" class="posiInput"  name="nom" [(ngModel)]="rendezVous.nom" required><br>
+              </div>
+               <div>
+                <label>Heure:</label><br>
+                <input type="email" class="posiInput"  name="email" [(ngModel)]="rendezVous.email" required  (input)="verifierExistenceEmail()" ><br>
+              </div>
+              <!-- <div>
+                <label>Téléphone:</label><br>
+                <input type="tel" class="posiInput" name="telephone" required [(ngModel)]="rendezVous.telephone"><br>
+              </div> -->
+              <div>
+                <label>Type de rendez-vous</label><br>
+                <select class="posiInput" name="typeRV" required [(ngModel)]="rendezVous.typeRendezVous">
+                  <option value="en_ligne">En ligne</option>
+                  <option value="presentiel">Présentiel</option>
+                </select>
+                <!-- <label>Type de rendez-vous</label><br>
+                <input type="tel" class="posiInput" name="typeRV" required [(ngModel)]="rendezVous.typeRendezVous"><br> -->
+              </div>
+              <div >
+
+              </div>
+
+            </div>
+            <div class="mt-5">
+              <label> Description: </label> <br>
+              <!-- <input type="textarea"> -->
+              <textarea name="" class="descrip"  cols="60" rows="5"></textarea>
+            </div>
+            <div class="infoPersonnelB3 text-center" >
+              <button class="btn rendez-vous" (click)="validerRendezVous()">Subscrire votre rendez-vous</button>
+            </div>
+                <!--  <a href="" class="btn rendez-vous" [routerLink]="['/priseRV']">Prendre une rendez-vous</a> -->
+            </div>
+          </div>
+          </div>
+        </div>
+    </div>
+  </main>
+</div>

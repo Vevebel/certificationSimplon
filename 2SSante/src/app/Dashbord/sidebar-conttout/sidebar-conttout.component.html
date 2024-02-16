@@ -54,10 +54,16 @@
     </li>
     <li>
       <a style="cursor: pointer;">
+        <i class='bx bxs-doughnut-chart' [routerLink]="['/planning']"></i>
+        <span class="text" [routerLink]="['/planning']">Gestion planning</span>
+      </a>
+    </li>
+    <!-- <li>
+      <a style="cursor: pointer;">
         <i class='bx bxs-doughnut-chart' [routerLink]="['/gestion-patient']"></i>
         <span class="text" [routerLink]="['/gestion-patient']">liste Patients</span>
       </a>
-    </li>
+    </li> -->
     <li>
       <a style="cursor: pointer;">
         <i class='bx bxs-message-dots' [routerLink]="['/consultation']"></i>
@@ -78,6 +84,18 @@
         <span class="text-black" [routerLink]="['/dashboardPatient']">Dashboard</span>
       </a>
     </li>
+    <li class="active">
+      <a style="cursor: pointer;">
+        <i class='bx bxs-dashboard' [routerLink]="['/consultationPatient']"></i>
+        <span class="text-black" [routerLink]="['/consultationPatient']">Prendre un rendez-vous</span>
+      </a>
+    </li>
+    <!-- <li class="active">
+      <a style="cursor: pointer;">
+        <i class='bx bxs-dashboard' [routerLink]="['/priseConsultation']"></i>
+        <span class="text-black" [routerLink]="['/priseConsultation']">Calendrier des Plannind</span>
+      </a>
+    </li> -->
     <li>
       <a style="cursor: pointer;">
         <i class='bx bxs-shopping-bag-alt' [routerLink]="['/historique']"></i>
@@ -87,7 +105,7 @@
     <li>
       <a style="cursor: pointer;">
         <i class='bx bxs-doughnut-chart' [routerLink]="['/MesMedicin']"></i>
-        <span class="text-black" [routerLink]="['/MesMedicin']">Mes médecins</span>
+        <span class="text-black" [routerLink]="['/MesMedicin']">Médecins</span>
       </a>
     </li>
     <!-- <li>

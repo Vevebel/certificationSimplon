@@ -1,7 +1,9 @@
 
  	<!-- NAVBAR -->
    <nav class="navabarDash fixed-top ">
-    <div></div>
+    <div>
+
+    </div>
     <div class="infoProfileC ">
       <div class="infoProfileC">
         <a href="#" class="profile">
@@ -13,9 +15,9 @@
         </div>
       </div>
       <div class="ms-5 profilPlace">
-        <a class="logout"  [routerLink]="['/accueil']">
+        <a class="logout"  (click)="deconnexion()">
           <i class="bi bi-box-arrow-right"></i>
-          <span class="text">Deconnexion</span>
+          <span class="text" >Deconnexion</span>
         </a>
       </div>
 

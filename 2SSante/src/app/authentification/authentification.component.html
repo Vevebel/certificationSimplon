@@ -63,7 +63,7 @@
                   <!-- <label for="floatingInput">Genre:</label> -->
                 </div>
                 <div  class="form-floating mb-3" *ngIf="isMedecin || isPatient">
-                  <select class="form-control mb-3" id="floatingInput" [(ngModel)]="ville" name="ville" required >
+                  <select class="form-control mb-3" id="floatingInput" [(ngModel)]="ville" name="ville" required  placeholder="">
                     <option value=""> Sélectionnez votre ville</option>
                     <option *ngFor="let ville of villes" [value]="ville.id">{{ ville.nom }}</option>
                   </select>

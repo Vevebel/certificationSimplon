@@ -256,60 +256,111 @@ inscription() {
     }
 }
 
+  // connexion() {
+  //   console.log('Email:', this.email);
+  //   console.log('Mot de passe:', this.password);
+
+  //   const userData = {
+
+  //     email: this.email,
+  //     password: this.password,
+
+  //   };
+  //   this.authservice.connexion(userData).subscribe(
+  //     (response:any) => {
+  //       console.log( response);
+  //       const userDataJSON = JSON.stringify(response);
+  //       let tokenC = response.access_token.token;
+  //       let user = response.access_token.user;
+  //       this.authservice.setToken(tokenC);
+  //       // localStorage.setItem('token', response.acces_token.token)
+  //       // On met à jour le localstorage en lui donnant les infos de l'utilisateur connecté
+  //       localStorage.setItem('userData', JSON.stringify(user));
+  //       // console.log(response.access_token.token
+  //       //   );
+
+  //       // localStorage.setItem('userData', userDataJSON);
+  //       // this.resetFields();
+  //       // this.authservice.setToken(response.access_token.access_token.token)
+  //       if(user.role=='admin'){
+  //         // alert('admin')
+  //         this.route.navigate(['/dashboardAdmin']);
+  //          this.verifierChamps("Connexion réussie!", "", "success");
+  //               this.resetFields();
+  //       }else if(user.role=='medecin'){
+  //         this.route.navigate(['/dashboardMed']);
+  //         this.verifierChamps("Connexion réussie!", "", "success");
+  //         this.resetFields();
+  //         // alert('medecin')
+
+  //       }else if(user.role=='patient'){
+  //         this.route.navigate(['/dashboardPatient']);
+  //         this.verifierChamps("Connexion réussie!", "", "success");
+  //         this.resetFields();
+  //         // alert('patient')
+  //       } else {
+  //         // Redirection par défaut
+  //         this.route.navigate(['/accueil']);
+  //         // alert('aucun')
+  //       }
+  //     },
+  //     (error:any) =>{
+  //       console.log(error)
+  //       console.error('Erreur de connexion : ', error);
+  //     }
+  //   )
+  // }
   connexion() {
+    if (!this.email || !this.password) {
+      // Vérification de la présence de l'email et du mot de passe
+      console.error("Veuillez saisir votre email et votre mot de passe.");
+      return;
+    }
+
     console.log('Email:', this.email);
     console.log('Mot de passe:', this.password);
 
     const userData = {
-
       email: this.email,
       password: this.password,
-
     };
+
     this.authservice.connexion(userData).subscribe(
-      (response:any) => {
-        console.log( response);
+      (response: any) => {
+        console.log(response);
         const userDataJSON = JSON.stringify(response);
         let tokenC = response.access_token.token;
         let user = response.access_token.user;
         this.authservice.setToken(tokenC);
-        // localStorage.setItem('token', response.acces_token.token)
-        // On met à jour le localstorage en lui donnant les infos de l'utilisateur connecté
         localStorage.setItem('userData', JSON.stringify(user));
-        // console.log(response.access_token.token
-        //   );
 
-        // localStorage.setItem('userData', userDataJSON);
-        // this.resetFields();
-        // this.authservice.setToken(response.access_token.access_token.token)
-        if(user.role=='admin'){
-          // alert('admin')
+        if (user.role == 'admin') {
           this.route.navigate(['/dashboardAdmin']);
-           this.verifierChamps("Connexion réussie!", "", "success");
-                this.resetFields();
-        }else if(user.role=='medecin'){
+          this.verifierChamps("Connexion réussie!", "", "success");
+          this.resetFields();
+        } else if (user.role == 'medecin') {
           this.route.navigate(['/dashboardMed']);
           this.verifierChamps("Connexion réussie!", "", "success");
           this.resetFields();
-          // alert('medecin')
-
-        }else if(user.role=='patient'){
+        } else if (user.role == 'patient') {
           this.route.navigate(['/dashboardPatient']);
           this.verifierChamps("Connexion réussie!", "", "success");
           this.resetFields();
-          // alert('patient')
         } else {
-          // Redirection par défaut
           this.route.navigate(['/accueil']);
-          // alert('aucun')
         }
       },
-      (error:any) =>{
-        console.log(error)
-        console.error('Erreur de connexion : ', error);
+      (error: any) => {
+        console.log(error);
+        if (error.status === 401) {
+          console.error("Adresse e-mail ou mot de passe incorrect.");
+        } else {
+          console.error('Erreur de connexion : ', error);
+        }
       }
     )
   }
+
 
   resetFields() {
     this.nom = '';
@@ -526,7 +577,26 @@ inscription() {
       }
       }
   }
+  deconnexion(): void {
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Êtes-vous sûr de vouloir vous déconnecter ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, se déconnecter',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Suppression des informations de l'utilisateur connecté du localStorage
+        localStorage.removeItem('userData');
 
+        // Redirection vers la page d'accueil ou la page de connexion
+        this.router.navigate(['/accueil']); // Modifiez cette ligne en fonction de votre structure de navigation
+      }
+    });
+  }
 
 
 }

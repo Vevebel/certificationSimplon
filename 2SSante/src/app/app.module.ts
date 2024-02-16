@@ -41,6 +41,9 @@ import { HistoriqueDesRVComponent } from './Dashbord/historique-des-rv/historiqu
 import { MesMedecinComponent } from './Dashbord/mes-medecin/mes-medecin.component';
 import { AuthentificationService } from './servicesSRNRV/authentification.service';
 import { AuthInterceptor } from './interceptors/interceptors';
+import { PlanningDuMedecinComponent } from './Dashbord/planning-du-medecin/planning-du-medecin.component';
+import { RendezVousPatientComponent } from './Dashbord/rendez-vous-patient/rendez-vous-patient.component';
+import { CalendrierPlannificationComponent } from './Dashbord/calendrier-plannification/calendrier-plannification.component';
 // import { TokenInterceptorProvider } from './token.interceptor';
 
 @NgModule({
@@ -77,6 +80,10 @@ import { AuthInterceptor } from './interceptors/interceptors';
     ListeRDVEnAttenteComponent,
     HistoriqueDesRVComponent,
     MesMedecinComponent,
+    PlanningDuMedecinComponent,
+    RendezVousPatientComponent,
+    RendezVousPatientComponent,
+    CalendrierPlannificationComponent
     // LitesArticleComponent
   ],
   imports: [
