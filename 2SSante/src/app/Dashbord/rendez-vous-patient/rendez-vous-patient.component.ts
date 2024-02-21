@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { RendezVous } from 'src/app/modelSRS/rendezVous';
 import { PatientService } from 'src/app/servicesSRNRV/patient.service';
 import { PlanningService } from 'src/app/servicesSRNRV/planning.service';
@@ -11,66 +12,127 @@ import Swal from 'sweetalert2';
   templateUrl: './rendez-vous-patient.component.html',
   styleUrls: ['./rendez-vous-patient.component.css']
 })
-export class RendezVousPatientComponent {
-  rendezVous = new RendezVous(); // Initialisez une instance du modèle
+export class RendezVousPatientComponent implements OnInit {
+  rendezVous = new RendezVous();
   emailPatient: string = '';
+  selectedRendezVousId: string = '';
+  tabPlanningMedecin: any;
+  motifs: string[] = [
+    'Consultation_generale',
+   'Prescription_de_méng test --include src/app/login/login.component.spec.tsdicaments_renouvelables',
+   'Suivi_de_traitement',
+    'Conseils_sur_des_symptomes_mineurs',
+   'Medecine_preventive',
+   'Problemes_de_sante_mentale',
+    'Deuxieme_avis_medical',
+    'Suivi_post_operatoire',
+    'Question_de_sante_sexuelle'
+  ];
+  selectedMotif: string = '';
+  planningChoisi: any;
 
-  constructor(private rendezVousService: RendezVousService,
-     private patientService:PatientService,
-     private http: HttpClient,
-     private planningService: PlanningService ) {}
-  plannings: any[] = [];
-  // rendezVous: any = {
-  //   date: '',
-  //   heureRv: ''
-  // };
-
-  // constructor(private planningService: PlanningService) { }
+  constructor(
+    private rendezVousService: RendezVousService,
+    private patientService: PatientService,
+    private http: HttpClient,
+    private planningService: PlanningService,
+    private route: ActivatedRoute
+  ) {}
+  idPlanning=this.route.snapshot.params['id']
 
   ngOnInit(): void {
-    this.getPlannings();
+    // Chargez les plannings lors de l'initialisation du composant
+
+    this.tabPlanningMedecin = JSON.parse(localStorage.getItem('PlanningMedecin') || '[]');
+    console.log('je suis tabPlanning',this.tabPlanningMedecin);
+    console.log(this.idPlanning)
+    this.planningChoisi=this.tabPlanningMedecin.find((item:any)=>item.id==this.idPlanning);
+    console.log(this.planningChoisi)
+
   }
+  planning: any;
+  plannings: any[] = [];
 
   getPlannings(): void {
+    // let detailsPlannings= planning_id
     this.planningService.getPlannings().subscribe(
-      (plannings) => {
-        this.plannings = plannings;
+      (response) => {
+        console.log('response',response);
+
+        this.plannings = response;
       },
       (error) => {
         console.error('Erreur lors de la récupération des plannings :', error);
       }
     );
   }
-  verifierExistenceEmail(): void {
-    if (this.rendezVous.email) {
-      this.patientService.verifierExistencePatient(this.rendezVous.email).subscribe(
-        (existe: boolean) => {
-          if (existe) {
-            console.log('L\'email existe dans la base de données.');
-            // Si l'e-mail existe, continuez la validation du rendez-vous
-            this.validerRendezVous();
-          } else {
-            console.log('L\'email n\'existe pas dans la base de données.');
-            // Si l'e-mail n'existe pas, affichez un message demandant à l'utilisateur de s'inscrire d'abord
-            Swal.fire({
-              icon: 'info',
-              title: 'Inscription nécessaire',
-              text: 'Vous devez d\'abord vous inscrire pour pouvoir prendre un rendez-vous.'
-            });
-          }
-        },
-        (error: any) => {
-          console.error('Une erreur s\'est produite lors de la vérification de l\'existence de l\'email : ', error);
-        }
-      );
-    }
+  getPlanningDetails(planning_id: string): void {
+    // console.log('Détails du planning récupérés :', this.planningDetails);
+    this.planning=planning_id;
+    console.log(this.planning);
+
+    };
+
+    // Affecter les détails du planning simulé à la variable planningDetails
+    // this.planningDetails = mockPlanningDetails;
+valider(){
+  const planning={
+    planning_id:this.idPlanning,
+    heure:this.rendezVous.heureRv,
+    "motif":this.selectedMotif,
+    type:this.rendezVous.typeRendezVous,
+
   }
+  console.log(planning)
+  this.rendezVousService.getRendez(planning).subscribe((response:any)=>{
+    console.log(response);
+
+  })
+}
 
 
   validerRendezVous(): void {
-    if (this.rendezVous.nom && this.rendezVous.email && this.rendezVous.telephone && this.rendezVous.typeRendezVous && this.rendezVous.date && this.rendezVous.heureRv) {
-      // Vérifiez d'abord si l'e-mail existe dans la base de données
-      this.verifierExistenceEmail();
+
+    if (this.rendezVous.typeRendezVous && this.rendezVous.heureRv) {
+      // Vérification de l'heure de rendez-vous par rapport au planning
+      const heureRv = new Date(this.rendezVous.heureRv);
+
+      if (this.selectedRendezVousId) {
+        const rendezVousSelectionne = this.plannings.find(rv => rv.id === this.selectedRendezVousId);
+        if (rendezVousSelectionne) {
+          const heureDebut = new Date(rendezVousSelectionne.heure_debut);
+          const heureFin = new Date(rendezVousSelectionne.heure_fin);
+
+          if (heureRv >= heureDebut && heureRv <= heureFin) {
+            // L'heure de rendez-vous est valide
+            // Placez ici le code pour soumettre le rendez-vous
+            const planning={
+              planning_id:this.idPlanning,
+              heure:this.rendezVous.heureRv,
+              type:this.rendezVous.typeRendezVous,
+              motif:this.selectedMotif,
+
+            }
+            console.log(planning)
+            this.rendezVousService.getRendez(planning).subscribe((response:any)=>{
+              console.log(response);
+            })
+          } else {
+            // L'heure de rendez-vous n'est pas valide
+            Swal.fire({
+              icon: 'error',
+              title: 'Erreur',
+              text: 'L\'heure de rendez-vous doit être comprise entre ' +
+                `${heureDebut.getHours()}:${heureDebut.getMinutes()}` +
+                ` et ${heureFin.getHours()}:${heureFin.getMinutes()}.`
+            });
+          }
+        } else {
+          console.error('Aucun rendez-vous trouvé avec l\'ID sélectionné.');
+        }
+      } else {
+        console.error('Aucun rendez-vous sélectionné.');
+      }
     } else {
       Swal.fire({
         icon: 'error',
@@ -78,5 +140,17 @@ export class RendezVousPatientComponent {
         text: 'Veuillez remplir tous les champs du formulaire.'
       });
     }
+
+   }
+   planningDetail(){
+    // getALLPlannings.planningService()
+    this.planningService.getALLPlannings(this.planning.id).subscribe(
+      (response:any)=>{
+        console.log(response.plannings.planning_id );
+        this.planning=response.plannings.planning_id;
+      }
+    )
+
   }
+
 }

@@ -26,9 +26,11 @@ export class RendezVousService {
 
   // Méthode pour récupérer les rendez-vous depuis votre API ou autre source de données
   getRendezVous(): Observable<RendezVous[]> {
-    return this.http.get<RendezVous[]>(`${baseUrl}/consulter-docteur/`);
+    return this.http.post<RendezVous[]>(`${baseUrl}/consulter-docteur`, {});
   }
-
+  getRendez(planning:any): Observable<RendezVous[]> {
+    return this.http.post<RendezVous[]>(`${baseUrl}/consulter-docteur`, planning);
+  }
   // Méthode pour accepter un rendez-vous
   acceptRendezVous(id: number): Observable<any> {
     console.log("Rendez-vous accepté : ", id);

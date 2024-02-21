@@ -67,6 +67,12 @@
   margin-top: 10vh;
   margin-bottom: 4vh;
 }
+.boutonRende{
+  color: #ffffff;
+  background-color: #CE0033;
+  font-weight: 900;
+  border-radius: 25px;
+}
 .carteArticle{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr ;
@@ -83,7 +89,17 @@ main{
   margin: 2% auto;
   /* border: 1px solid red; */
 }
-
+.card{
+  padding: 5vh;
+}
+.cartePlanning{
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  gap: 4vh;
+  margin-bottom: 5vh;
+  padding-bottom: 5vh;
+  /* padding: 10vh; */
+}
 
 @media only screen and (max-width: 1300px) {
   /* .sectionMedecin{

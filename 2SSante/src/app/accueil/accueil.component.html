@@ -121,43 +121,26 @@
           </div>
         </div>
       </div>
-      <div class="container medecin" >
+      <div class="container medecin">
         <div class="text-center mt-5">
           <h3><u>Quelques uns des spécialistes</u></h3>
         </div>
         <div class="container mt-5" id="cardMedecin">
-          <div class="col" id="totalMedecin">
-            <div  id="contenuTemoin">
-              <img src="../../assets/medecin1.png" class=" mx-auto" alt="..." id="profile">
-              <div >
-                <h5 id="NomTemoins">Dr. YOVO</h5>
-                <p small class="text-body-secondary">Cardiologue</p>
+          <div class="col" *ngFor="let medecin of medecin">
+            <div id="contenuTemoin">
+              <img src="http://127.0.0.1:8000/storage/{{ medecin.image }}" class="mx-auto" alt="..." id="profile">
+              <div>
+                <h5 id="NomTemoins">{{ medecin.nom }}</h5>
+                <p small class="text-body-secondary">{{ medecin.specialite }}</p>
               </div>
             </div>
-          </div>
-          <div class="col" id="totalMedecin">
-            <div  id="contenuTemoin">
-              <img src="../../assets/medecin1.png" class=" mx-auto" alt="..." id="profile">
-              <div >
-                <h5 id="NomTemoins">Dr. YOVO</h5>
-                <p small class="text-body-secondary">Cardiologue</p>
-                </div>
-              </div>
-            </div>
-            <div class="col" id="totalMedecin">
-              <div  id="contenuTemoin">
-                <img src="../../assets/medecin1.png" class=" mx-auto" alt="..." id="profile">
-            <div >
-              <h5 id="NomTemoins">Dr. YOVO</h5>
-              <p small class="text-body-secondary">Cardiologue</p>
-            </div>
-          </div>
           </div>
         </div>
         <div class="text-center mt-2 mb-5">
-          <a href="#" class=" btn card-link" id="voirPlus">Voir la liste des médecins</a>
+          <a href="#" class="btn card-link" id="voirPlus">Voir la liste des médecins</a>
         </div>
-  </div>
+      </div>
+
   <div class="container article">
     <div class="text-center mb-3">
       <h3>Articles</h3>

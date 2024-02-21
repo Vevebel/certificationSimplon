@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +44,9 @@ import { AuthInterceptor } from './interceptors/interceptors';
 import { PlanningDuMedecinComponent } from './Dashbord/planning-du-medecin/planning-du-medecin.component';
 import { RendezVousPatientComponent } from './Dashbord/rendez-vous-patient/rendez-vous-patient.component';
 import { CalendrierPlannificationComponent } from './Dashbord/calendrier-plannification/calendrier-plannification.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { TokenInterceptorProvider } from './token.interceptor';
 
 @NgModule({
@@ -93,17 +96,24 @@ import { CalendrierPlannificationComponent } from './Dashbord/calendrier-plannif
     HttpClientModule,
     ReactiveFormsModule,
     DataTablesModule,
+    // CalendarModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    BrowserAnimationsModule,
+
 
   ],
   providers: [
     // DataService,
     // ArticleService,
     AuthentificationService,
+
     {
       provide:HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    { provide: LOCALE_ID, useValue: 'fr' },
+
     // TokenInterceptorProvider
   ],
   bootstrap: [AppComponent]

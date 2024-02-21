@@ -26,6 +26,7 @@ import { MesMedecinComponent } from './Dashbord/mes-medecin/mes-medecin.componen
 import { DashMedecinComponent } from './Dashbord/dash-medecin/dash-medecin.component';
 import { PlanningDuMedecinComponent } from './Dashbord/planning-du-medecin/planning-du-medecin.component';
 import { RendezVousPatientComponent } from './Dashbord/rendez-vous-patient/rendez-vous-patient.component';
+import { adminGuardGuard, authGuardGuard, patientGuardGuard } from './guards/auth-guard.guard';
 // import { AuthentificationComponent } from './AuthentificationComponent/authentification.component';
 
 const routes: Routes = [
@@ -39,9 +40,9 @@ const routes: Routes = [
   {path : 'login', component : AuthentificationComponent,},
   {path : 'priseRV', component : PriseRdvComponent,},
   {path : 'detailMed/:id' , component : DetailMedecinsComponent,},
-  {path : 'dashboardAdmin', component : DashAdminComponent,},
-  {path : 'dashboardMed', component :DashMedecinComponent ,},
-  {path : 'dashboardPatient', component :DashPatientComponent ,},
+  {path : 'dashboardAdmin', component : DashAdminComponent, canActivate:[adminGuardGuard]},
+  {path : 'dashboardMed', component :DashMedecinComponent , canActivate:[authGuardGuard]},
+  {path : 'dashboardPatient', component :DashPatientComponent ,canActivate:[patientGuardGuard]},
   {path : 'gestion-contenu', component :GestionContenueComponent ,},
   {path : 'gestion-user', component : GestionUtilisateurComponent,},
   {path : 'gestion-role', component : GestionRoleComponent,},
@@ -52,7 +53,7 @@ const routes: Routes = [
   {path : 'historique', component :HistoriqueDesRVComponent ,},
   {path : 'MesMedicin', component : MesMedecinComponent,},
   {path : 'planning', component : PlanningDuMedecinComponent,},
-  {path : 'consultationPatient', component : RendezVousPatientComponent,},
+  {path : 'consultationPatient/:id', component : RendezVousPatientComponent,},
   {path : 'priseConsultation/:id', component : CalendrierPlannificationComponent,},
   // {path : '', component : ,},
   // {path : '', component : ,},

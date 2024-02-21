@@ -124,7 +124,11 @@ li {
 /* Pour les écrans de taille moyenne et plus grands */
 @media screen and (min-width: 768px) {
   #sidebar {
-    width: 280px; /* Taille originale de la barre latérale */
+    width: 20%; /* Taille originale de la barre latérale */
+  }
+
+  #sidebar .side-menu {
+    width: 100%;
   }
 }
 
@@ -141,6 +145,6 @@ li {
 /* Pour les écrans très petits (mobiles) */
 @media screen and (max-width: 480px) {
   #sidebar {
-    width: 100%; /* Barre latérale prend la pleine largeur de l'écran */
+    width: 100px; /* Barre latérale prend la pleine largeur de l'écran */
   }
 }
