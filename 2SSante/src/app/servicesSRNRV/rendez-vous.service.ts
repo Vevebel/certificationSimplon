@@ -19,10 +19,15 @@ export class RendezVousService {
   constructor(private http: HttpClient) { }
 
   // Méthode pour récupérer la liste des rendez-vous
-  getRendezVousList(): Observable<any[]> {
-    // Simulation d'un appel HTTP pour récupérer les données
-    return of(this.rendezVousList);
-  }
+  // a decommenter
+  // getRendezVousList(): Observable<any[]> {
+  //   // Simulation d'un appel HTTP pour récupérer les données
+  //   return of(this.rendezVousList);
+  // }
+    // Méthode pour récupérer la liste des rendez-vous du médecin
+    getRendezVousList(): Observable<any[]> {
+      return this.http.get<any[]>(`${baseUrl}/liste-consultation`, {});
+    }
 
   // Méthode pour récupérer les rendez-vous depuis votre API ou autre source de données
   getRendezVous(): Observable<RendezVous[]> {
@@ -33,13 +38,19 @@ export class RendezVousService {
   }
   // Méthode pour accepter un rendez-vous
   acceptRendezVous(id: number): Observable<any> {
-    console.log("Rendez-vous accepté : ", id);
-    return of({ message: 'Rendez-vous accepté avec succès' });
+    return this.http.get<any[]>(`${baseUrl}/accepter-consultation/${id}`, {})
+    // console.log("Rendez-vous accepté : ", id);
+    // return of({ message: 'Rendez-vous accepté avec succès' });
   }
 
   // Méthode pour refuser un rendez-vous
   refuseRendezVous(id: number): Observable<any> {
     console.log("Rendez-vous refusé : ", id);
     return of({ message: 'Rendez-vous refusé avec succès' });
+  }
+
+
+  getRendezVousAcceptes(): Observable<any> {
+    return this.http.get(`${baseUrl}/accepter-consultation/acceptes`);
   }
 }

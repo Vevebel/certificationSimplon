@@ -64,6 +64,10 @@ updateArticle(id: number, articles:any): Observable<any> {
     // return this.http.get<Article[]>(this.baseUrl);
     return this.http.get<any>(`${baseUrl}/home`);
   }
+  // Récupérer les détails d'un article par son ID
+  getArticleDetails(id: number): Observable<any> {
+    return this.http.get<any>(`${baseUrl}/article/${id}`);
+  }
 
 }
 

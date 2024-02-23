@@ -75,20 +75,65 @@ export class RendezVousPatientComponent implements OnInit {
 
     // Affecter les détails du planning simulé à la variable planningDetails
     // this.planningDetails = mockPlanningDetails;
-valider(){
-  const planning={
-    planning_id:this.idPlanning,
-    heure:this.rendezVous.heureRv,
-    "motif":this.selectedMotif,
-    type:this.rendezVous.typeRendezVous,
+// valider(){
+//   const planning={
+//     planning_id:this.idPlanning,
+//     heure:this.rendezVous.heureRv,
+//     "motif":this.selectedMotif,
+//     type:this.rendezVous.typeRendezVous,
 
+//   }
+//   console.log(planning)
+//   this.rendezVousService.getRendez(planning).subscribe((response:any)=>{
+//     console.log(response);
+
+//   })
+// }
+valider(): void {
+  if (this.rendezVous.typeRendezVous && this.rendezVous.heureRv) {
+      // Vérification de l'heure de rendez-vous par rapport au planning
+      const heureRv = new Date(this.rendezVous.heureRv);
+
+      if (this.planningChoisi) {
+          const heureDebut = new Date(this.planningChoisi.heure_debut);
+          const heureFin = new Date(this.planningChoisi.heure_fin);
+
+          if (heureRv >= heureDebut && heureRv <= heureFin) {
+              // L'heure de rendez-vous est valide
+              // Placez ici le code pour soumettre le rendez-vous
+              const planning = {
+                  planning_id: this.idPlanning,
+                  heure: this.rendezVous.heureRv,
+                  type: this.rendezVous.typeRendezVous,
+                  motif: this.selectedMotif,
+              };
+
+              console.log(planning);
+              this.rendezVousService.getRendez(planning).subscribe((response: any) => {
+                  console.log(response);
+              });
+          } else {
+              // L'heure de rendez-vous n'est pas valide
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Erreur',
+                  text: "L'heure de rendez-vous doit être comprise entre " +
+                      `${heureDebut.getHours()}:${heureDebut.getMinutes()}` +
+                      ` et ${heureFin.getHours()}:${heureFin.getMinutes()}.`
+              });
+          }
+      } else {
+          console.error("Aucun planning n'a été sélectionné.");
+      }
+  } else {
+      Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Veuillez remplir tous les champs du formulaire.'
+      });
   }
-  console.log(planning)
-  this.rendezVousService.getRendez(planning).subscribe((response:any)=>{
-    console.log(response);
-
-  })
 }
+
 
 
   validerRendezVous(): void {

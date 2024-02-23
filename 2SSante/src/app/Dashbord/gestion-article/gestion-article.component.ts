@@ -89,6 +89,45 @@ export class GestionArticleComponent  implements OnInit {
     });
   }
 
+  afficherDetailsArticle(article: any): void {
+    this.articleService.getArticleDetails(article.id).subscribe((response: any) => {
+      this.titre = response.titre;
+      this.description = response.description;
+      this.image = response.image;
+
+      // Ouvrir la fenêtre modale des détails de l'article
+      // $('#exampleModal-details').modal('show');
+    });
+  }
+
+  // Méthode pour charger les détails de l'article
+// afficherDetailsArticle(article: any): void {
+//   this.articleService.getArticleDetails(article.id).subscribe((response: any) => {
+//       // Afficher les détails de l'article dans une boîte de dialogue modale
+//       // Swal.fire({
+//       //     title: article.titre,
+//       //     html: `
+//       //         <p>Description: ${article.description}</p>
+//       //         <p>Date de création: ${article.createdAt}</p>
+//       //         <p>Date de mise à jour: ${article.updatedAt}</p>
+//       //         <img src="http://127.0.0.1:8000/storage/${article.image}" alt="Image de l'article" style="max-width: 100%;">
+//       //     `,
+//       //     confirmButtonText: 'Fermer'
+//       // });
+//   });
+// }
+// afficherDetailsArticle(article: any): void {
+//   this.articleService.getArticleDetails(article.id).subscribe((response: any) => {
+//     this.titre = response.titre;
+//     this.description = response.description;
+//     this.image = response.image;
+// console.log(response);
+
+//     // Ouvrir la fenêtre modale des détails de l'article
+//     // $('#exampleModal-details').modal('show');
+//   });
+// }
+
   // listerDesArticles() {
   //   console.log(this.listeArticle);
   //   this.articleService.getArticle().subscribe(

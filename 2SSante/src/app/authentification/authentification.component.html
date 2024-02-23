@@ -129,11 +129,15 @@
               <div class="mt-5 text-center">
                 <!-- <label class="mt-5 ms-5 ">Email:</label> -->
                 <!-- <label for="floatingInput">Email:</label> -->
-                <input class="   email" type="email"  [(ngModel)]="email" name="email" required  id="floatingInputCon" placeholder="Email:"><br>
+                <input class="   email" type="email"  [(ngModel)]="email" name="email" required  id="floatingInputCon" placeholder="Email:" input="verifEmailConFonction()"><br>
+                <p class="text-danger" *ngIf="!exactEmailCon">{{verifEmail}}</p>
+                <p class="text-success" *ngIf="exactEmailCon"><i class="bi bi-check2-all"></i> Exact !</p>
               </div>
               <div class="mt-3 text-center">
                 <!-- <label class="mt-5 ">Mot de passe:</label> -->
-                <input class=" subscription " type="password" [(ngModel)]="password" name="password" required  id="floatingInputCon" placeholder="Mot de passe:"><br>
+                <input class=" subscription " type="password" [(ngModel)]="password" name="password" required  id="floatingInputCon" placeholder="Mot de passe:" input="verifPasswordConFonction()"><br>
+                <p class="text-danger" *ngIf="!exactPasswordCon">{{verifPasswordCon}}</p>
+                <p class="text-success" *ngIf="exactPasswordCon"><i class="bi bi-check2-all"></i> Exact !</p>
               </div>
               <div class="mt-3 text-center">
                 <input type="button"   class="mt-4 subscription"  (click)="connexion()" value="Se connecter">

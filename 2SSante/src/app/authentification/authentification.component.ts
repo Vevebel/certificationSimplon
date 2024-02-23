@@ -268,59 +268,133 @@ inscription() {
     });
   }
 
+  // connexion() {
+  //   if (!this.email || !this.password) {
+  //     // Vérification de la présence de l'email et du mot de passe
+  //     this.showSwalWithTimer('Erreur', 'Veuillez saisir votre email et votre mot de passe.', 'error', 3000);
+  //     return;
+  //     // console.error("Veuillez saisir votre email et votre mot de passe.");
+  //     // return;
+  //   }
+
+  //   console.log('Email:', this.email);
+  //   console.log('Mot de passe:', this.password);
+
+  //   const userData = {
+  //     email: this.email,
+  //     password: this.password,
+  //   };
+
+  //   this.authservice.connexion(userData).subscribe(
+  //     (response: any) => {
+  //       console.log(response);
+  //       const userDataJSON = JSON.stringify(response);
+  //       let tokenC = response.access_token.token;
+  //       let user = response.access_token.user;
+  //       this.authservice.setToken(tokenC);
+  //       localStorage.setItem('userData', JSON.stringify(user));
+
+  //       if (user.role == 'admin') {
+  //         this.route.navigate(['/dashboardAdmin']);
+  //       } else if (user.role == 'medecin') {
+  //         this.route.navigate(['/dashboardMed']);
+  //       } else if (user.role == 'patient') {
+  //         this.route.navigate(['/dashboardPatient']);
+  //       } else {
+  //         this.route.navigate(['/accueil']);
+  //       }
+
+  //       // Afficher une alerte de connexion réussie et fermer automatiquement après 10 secondes
+  //       this.showSwalWithTimer('Connexion réussie!', '', 'success', 3000); // Alerte de succès avec un timer
+  //       this.resetFields();
+  //     },
+  //     (error: any) => {
+  //       console.log(error);
+  //       if (error.status === 401) {
+  //         this.showSwalWithTimer('Erreur', 'Adresse e-mail ou mot de passe incorrect.', 'error', 3000);
+  //       } else {
+  //         this.showSwalWithTimer('Erreur', 'Erreur de connexion. Veuillez réessayer plus tard.', 'error', 3000);
+  //         console.error('Erreur de connexion : ', error);
+  //       }
+  //     }
+  //   )
+
+  // }
+
   connexion() {
+    // Vérification de la présence de l'email et du mot de passe
     if (!this.email || !this.password) {
-      // Vérification de la présence de l'email et du mot de passe
-      this.showSwalWithTimer('Erreur', 'Veuillez saisir votre email et votre mot de passe.', 'error', 3000);
-      return;
-      // console.error("Veuillez saisir votre email et votre mot de passe.");
-      // return;
+        this.showSwalWithTimer('Erreur', 'Veuillez saisir votre email et votre mot de passe.', 'error', 3000);
+        return;
     }
 
+        // Appel des fonctions de validation des champs
+    this.verifEmailConFonction();
+    this.verifPasswordConFonction();
+
+    // Vérification si tous les champs sont valides
+    if (this.exactEmailCon && this.exactPasswordCon) {
+        // Exécuter le code de connexion ici
+    } else {
+        // Afficher un message d'erreur si les champs ne sont pas valides
+        console.log("Veuillez remplir tous les champs correctement.");
+    }
+    // Vérification de l'email
+    // const emailPattern = /^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+    // if (!this.email.match(emailPattern)) {
+    //     this.showSwalWithTimer('Erreur', 'Veuillez saisir un email valide.', 'error', 3000);
+    //     return;
+    // }
+
+    // // Vérification du mot de passe
+    // if (this.password.length < 5) {
+    //     this.showSwalWithTimer('Erreur', 'Le mot de passe doit contenir au moins 5 caractères.', 'error', 3000);
+    //     return;
+    // }
+
+    // Si les validations sont réussies, procéder à la connexion
     console.log('Email:', this.email);
     console.log('Mot de passe:', this.password);
 
     const userData = {
-      email: this.email,
-      password: this.password,
+        email: this.email,
+        password: this.password,
     };
 
     this.authservice.connexion(userData).subscribe(
-      (response: any) => {
-        console.log(response);
-        const userDataJSON = JSON.stringify(response);
-        let tokenC = response.access_token.token;
-        let user = response.access_token.user;
-        this.authservice.setToken(tokenC);
-        localStorage.setItem('userData', JSON.stringify(user));
+        (response: any) => {
+            console.log(response);
+            const userDataJSON = JSON.stringify(response);
+            let tokenC = response.access_token.token;
+            let user = response.access_token.user;
+            this.authservice.setToken(tokenC);
+            localStorage.setItem('userData', JSON.stringify(user));
 
-        if (user.role == 'admin') {
-          this.route.navigate(['/dashboardAdmin']);
-        } else if (user.role == 'medecin') {
-          this.route.navigate(['/dashboardMed']);
-        } else if (user.role == 'patient') {
-          this.route.navigate(['/dashboardPatient']);
-        } else {
-          this.route.navigate(['/accueil']);
-        }
+            if (user.role == 'admin') {
+                this.route.navigate(['/dashboardAdmin']);
+            } else if (user.role == 'medecin') {
+                this.route.navigate(['/dashboardMed']);
+            } else if (user.role == 'patient') {
+                this.route.navigate(['/dashboardPatient']);
+            } else {
+                this.route.navigate(['/accueil']);
+            }
 
-        // Afficher une alerte de connexion réussie et fermer automatiquement après 10 secondes
-        this.showSwalWithTimer('Connexion réussie!', '', 'success', 3000); // Alerte de succès avec un timer
-        this.resetFields();
-      },
-      (error: any) => {
-        console.log(error);
-        if (error.status === 401) {
-          this.showSwalWithTimer('Erreur', 'Adresse e-mail ou mot de passe incorrect.', 'error', 3000);
-        } else {
-          this.showSwalWithTimer('Erreur', 'Erreur de connexion. Veuillez réessayer plus tard.', 'error', 3000);
-          console.error('Erreur de connexion : ', error);
+            // Afficher une alerte de connexion réussie et fermer automatiquement après 10 secondes
+            this.showSwalWithTimer('Connexion réussie!', '', 'success', 3000); // Alerte de succès avec un timer
+            this.resetFields();
+        },
+        (error: any) => {
+            console.log(error);
+            if (error.status === 401) {
+                this.showSwalWithTimer('Erreur', 'Adresse e-mail ou mot de passe incorrect.', 'error', 3000);
+            } else {
+                this.showSwalWithTimer('Erreur', 'Erreur de connexion. Veuillez réessayer plus tard.', 'error', 3000);
+                console.error('Erreur de connexion : ', error);
+            }
         }
-      }
     )
-
-  }
-
+}
 
   resetFields() {
     this.nom = '';
