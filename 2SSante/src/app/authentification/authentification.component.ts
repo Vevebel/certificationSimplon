@@ -2,7 +2,7 @@ import { secteur_activite } from './../modelSRS/typesVHS';
 import { hopital } from './../modelSRS/hopital';
 import { ville } from './../modelSRS/ville';
 import { AuthentificationService } from './../servicesSRNRV/authentification.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 // import { DataService } from '../servicesSRNRV/data.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -14,7 +14,6 @@ import { DataService } from '../servicesSRNRV/data.service';
   styleUrls: ['./authentification.component.css']
 })
 export class AuthentificationComponent implements OnInit{
-
 
 
   nom: string = '';
@@ -31,18 +30,23 @@ export class AuthentificationComponent implements OnInit{
   age: number = 0;
   showConnexion: boolean = true;
   titleFrm: string = ''; // Ajout de la propriété titleFrm
-  // villes: any;
-  // hopitaux: any;
-  // secteur_actives: any;
-
-
-  // villes: any[];
-  // hopitals: any[];
-  // secteurs_activites:
-  // any[];
   villes: any;
   hopitals: any;
   secteur_activite: any;
+  image: any = '';
+
+
+  // Déclarez une variable pour stocker le fichier sélectionné
+  selectedFile: File | null = null;
+
+  // Déclarez une référence à l'élément de fichier dans le template
+  @ViewChild('photoInput') photoInput!: ElementRef;
+
+  // Méthode pour gérer le changement de fichier
+  onFileSelected(event: any) {
+    // Récupérez le fichier sélectionné
+    this.selectedFile = event.target.files[0] as File;
+  }
 
   // Inscription du patient ou du medecin
   // Les variables
@@ -189,11 +193,11 @@ constructor( private dataservice:DataService, private authservice: Authentificat
             console.log(response);
             if (response.success) {
                 // Gérer l'inscription réussie du médecin
-                this.verifierChamps("Inscription réussie! , Votre compte sera actif dans 24H", "", "success");
+                this.verifierChamps("Inscription réussie! , Vous recevrer un mail de validation de votre inscri", "", "success");
                 this.resetFields();
             } else {
                 // Gérer les cas où l'inscription du médecin a échoué
-                this.verifierChamps("Inscription réussie! , Votre compte sera actif dans 24H", "", "success",);
+                this.verifierChamps("Inscription réussie! , Vous recevrer un mail de validation de votre inscri", "", "success",);
                 this.resetFields();
             }
         },
@@ -215,11 +219,6 @@ inscriptionPatient() {
         genre: this.genre,
         role_id: this.role_id,
         ville_id: this.ville,
-        // secteur_active_id: this.secteur_activite,
-        // hopital_id: this.hopital,
-        // poids: this.poids,
-        // age: this.age,
-        // statut: 'en_attente',
     };
 
 
@@ -256,60 +255,146 @@ inscription() {
     }
 }
 
+
+  // Méthode pour afficher une alerte avec un timer
+  showSwalWithTimer(title: string, text: string, icon: any, timer: number) {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      timer: timer,
+      timerProgressBar: true,
+      showConfirmButton: false // Pour cacher le bouton de confirmation
+    });
+  }
+
+  // connexion() {
+  //   if (!this.email || !this.password) {
+  //     // Vérification de la présence de l'email et du mot de passe
+  //     this.showSwalWithTimer('Erreur', 'Veuillez saisir votre email et votre mot de passe.', 'error', 3000);
+  //     return;
+  //     // console.error("Veuillez saisir votre email et votre mot de passe.");
+  //     // return;
+  //   }
+
+  //   console.log('Email:', this.email);
+  //   console.log('Mot de passe:', this.password);
+
+  //   const userData = {
+  //     email: this.email,
+  //     password: this.password,
+  //   };
+
+  //   this.authservice.connexion(userData).subscribe(
+  //     (response: any) => {
+  //       console.log(response);
+  //       const userDataJSON = JSON.stringify(response);
+  //       let tokenC = response.access_token.token;
+  //       let user = response.access_token.user;
+  //       this.authservice.setToken(tokenC);
+  //       localStorage.setItem('userData', JSON.stringify(user));
+
+  //       if (user.role == 'admin') {
+  //         this.route.navigate(['/dashboardAdmin']);
+  //       } else if (user.role == 'medecin') {
+  //         this.route.navigate(['/dashboardMed']);
+  //       } else if (user.role == 'patient') {
+  //         this.route.navigate(['/dashboardPatient']);
+  //       } else {
+  //         this.route.navigate(['/accueil']);
+  //       }
+
+  //       // Afficher une alerte de connexion réussie et fermer automatiquement après 10 secondes
+  //       this.showSwalWithTimer('Connexion réussie!', '', 'success', 3000); // Alerte de succès avec un timer
+  //       this.resetFields();
+  //     },
+  //     (error: any) => {
+  //       console.log(error);
+  //       if (error.status === 401) {
+  //         this.showSwalWithTimer('Erreur', 'Adresse e-mail ou mot de passe incorrect.', 'error', 3000);
+  //       } else {
+  //         this.showSwalWithTimer('Erreur', 'Erreur de connexion. Veuillez réessayer plus tard.', 'error', 3000);
+  //         console.error('Erreur de connexion : ', error);
+  //       }
+  //     }
+  //   )
+
+  // }
+
   connexion() {
+    // Vérification de la présence de l'email et du mot de passe
+    if (!this.email || !this.password) {
+        this.showSwalWithTimer('Erreur', 'Veuillez saisir votre email et votre mot de passe.', 'error', 3000);
+        return;
+    }
+
+        // Appel des fonctions de validation des champs
+    this.verifEmailConFonction();
+    this.verifPasswordConFonction();
+
+    // Vérification si tous les champs sont valides
+    if (this.exactEmailCon && this.exactPasswordCon) {
+        // Exécuter le code de connexion ici
+    } else {
+        // Afficher un message d'erreur si les champs ne sont pas valides
+        console.log("Veuillez remplir tous les champs correctement.");
+    }
+    // Vérification de l'email
+    // const emailPattern = /^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+    // if (!this.email.match(emailPattern)) {
+    //     this.showSwalWithTimer('Erreur', 'Veuillez saisir un email valide.', 'error', 3000);
+    //     return;
+    // }
+
+    // // Vérification du mot de passe
+    // if (this.password.length < 5) {
+    //     this.showSwalWithTimer('Erreur', 'Le mot de passe doit contenir au moins 5 caractères.', 'error', 3000);
+    //     return;
+    // }
+
+    // Si les validations sont réussies, procéder à la connexion
     console.log('Email:', this.email);
     console.log('Mot de passe:', this.password);
 
     const userData = {
-
-      email: this.email,
-      password: this.password,
-
+        email: this.email,
+        password: this.password,
     };
+
     this.authservice.connexion(userData).subscribe(
-      (response:any) => {
-        console.log( response);
-        const userDataJSON = JSON.stringify(response);
-        let tokenC = response.access_token.token;
-        let user = response.access_token.user;
-        this.authservice.setToken(tokenC);
-        // localStorage.setItem('token', response.acces_token.token)
-        // On met à jour le localstorage en lui donnant les infos de l'utilisateur connecté
-        localStorage.setItem('userData', JSON.stringify(user));
-        // console.log(response.access_token.token
-        //   );
+        (response: any) => {
+            console.log(response);
+            const userDataJSON = JSON.stringify(response);
+            let tokenC = response.access_token.token;
+            let user = response.access_token.user;
+            this.authservice.setToken(tokenC);
+            localStorage.setItem('userData', JSON.stringify(user));
 
-        // localStorage.setItem('userData', userDataJSON);
-        // this.resetFields();
-        // this.authservice.setToken(response.access_token.access_token.token)
-        if(user.role=='admin'){
-          // alert('admin')
-          this.route.navigate(['/dashboardAdmin']);
-           this.verifierChamps("Connexion réussie!", "", "success");
-                this.resetFields();
-        }else if(user.role=='medecin'){
-          this.route.navigate(['/dashboardMed']);
-          this.verifierChamps("Connexion réussie!", "", "success");
-          this.resetFields();
-          // alert('medecin')
+            if (user.role == 'admin') {
+                this.route.navigate(['/dashboardAdmin']);
+            } else if (user.role == 'medecin') {
+                this.route.navigate(['/dashboardMed']);
+            } else if (user.role == 'patient') {
+                this.route.navigate(['/dashboardPatient']);
+            } else {
+                this.route.navigate(['/accueil']);
+            }
 
-        }else if(user.role=='patient'){
-          this.route.navigate(['/dashboardPatient']);
-          this.verifierChamps("Connexion réussie!", "", "success");
-          this.resetFields();
-          // alert('patient')
-        } else {
-          // Redirection par défaut
-          this.route.navigate(['/accueil']);
-          // alert('aucun')
+            // Afficher une alerte de connexion réussie et fermer automatiquement après 10 secondes
+            this.showSwalWithTimer('Connexion réussie!', '', 'success', 3000); // Alerte de succès avec un timer
+            this.resetFields();
+        },
+        (error: any) => {
+            console.log(error);
+            if (error.status === 401) {
+                this.showSwalWithTimer('Erreur', 'Adresse e-mail ou mot de passe incorrect.', 'error', 3000);
+            } else {
+                this.showSwalWithTimer('Erreur', 'Erreur de connexion. Veuillez réessayer plus tard.', 'error', 3000);
+                console.error('Erreur de connexion : ', error);
+            }
         }
-      },
-      (error:any) =>{
-        console.log(error)
-        console.error('Erreur de connexion : ', error);
-      }
     )
-  }
+}
 
   resetFields() {
     this.nom = '';
@@ -325,12 +410,18 @@ inscription() {
     this.age = 0;
   }
 
-  onProfilePicSelected(event: any) {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
-      // Do something with the selected profile picture
+  // onProfilePicSelected(event: any) {
+  //   if (event.target.files && event.target.files.length > 0) {
+  //     const file = event.target.files[0];
+  //     // Do something with the selected profile picture
+  //   }
+  // }
+    // inserer l'image
+    getFile(event: any) {
+      console.log('img', this.image);
+      console.warn(event.target.files[0]);
+      this.image = event.target.files[0] as File;
     }
-  }
 
 
   annulerInscription() {
@@ -375,7 +466,8 @@ inscription() {
 
   verifEmailFonction() {
     // Logique de vérification de l'email
-    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+    const emailPattern =/^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+    // const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
     this.exactEmail = false;
 
     if(this.email == ""){
@@ -392,7 +484,9 @@ inscription() {
 
   verifEmailConFonction() {
     // Logique de vérification de l'email pour la connexion
-    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+    // const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+    const emailPattern =/^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+
     this.exactEmail = false;
 
     if(this.email == ""){
@@ -406,22 +500,13 @@ inscription() {
       this.exactEmail = true;
     }
   }
-  verifAgeFonction() {
-    if (this.age === null || this.age === undefined || isNaN(this.age)) {
-      this.verifAge = "Veuillez entrer un âge valide";
-      this.exactAge = false;
-    } else if (this.age < 0 || this.age > 150) { // C'est un exemple arbitraire, ajustez selon vos besoins
-      this.verifAge = "Veuillez entrer un âge valide (entre 0 et 150 ans)";
-      this.exactAge = false;
-    } else {
-      this.verifAge = "";
-      this.exactAge = true;
-    }
-  }
+
 
   verifAllEmailFonction(email: any, verifEmail: any, exactEmail: any) {
     // Logique de vérification de l'email
-    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+    // const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+    const emailPattern =/^[A-Za-z]+[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9.-]+.[A-Za-z]{2,}$/;
+
     exactEmail = false;
 
     if(email == ""){
@@ -438,7 +523,7 @@ inscription() {
 
   verifPasswordFonction() {
     // Logique de vérification du mot de passe
-
+    // const passwordPattern=/^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,}$/;
     this.exactPassword = false;
     if(this.password == ""){
       this.verifPassword = "Veuillez renseigner votre mot de passe";
@@ -462,25 +547,52 @@ inscription() {
       this.verifPasswordConf = "";
       this.exactPasswordConf = true;
     }
-  }
+}
 
-  verifPasswordConFonction() {
+verifPasswordConFonction() {
     // Logique de vérification du mot de passe pour la connexion
     this.exactPassword = false;
-    if(this.password == ""){
-      this.verifPassword = "Veuillez renseigner votre mot de passe";
+    const passwordRegex = /^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,}$/;
+    if(this.password === ""){
+        this.verifPassword = "Veuillez renseigner votre mot de passe";
+    } else if (!passwordRegex.test(this.password)) {
+        this.verifPassword = "Mot de passe invalide. Il doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial parmi #?!@$%^&*-";
+    } else {
+        this.verifPassword = "";
+        this.exactPassword = true;
     }
-    else if (this.password.length < 5 ){
-      this.verifPassword = "Mot de passe doit être supérieur ou égal à 5";
-    }
-    else{
-      this.verifPassword = "";
-      this.exactPassword = true;
-    }
-  }
-  verifTelephoneFonction() {
-    const phonePattern = /^\d{10}$/; // Cette expression régulière suppose que le numéro de téléphone doit avoir exactement 10 chiffres
+}
 
+  // verifPasswordConfFonction() {
+  //   // Logique de vérification de la confirmation du mot de passe
+  //   this.exactPasswordConf = false;
+  //   if(this.passwordConf === "") {
+  //     this.verifPasswordConf = "Veuillez confirmer votre mot de passe";
+  //   } else if (this.password !== this.passwordConf) {
+  //     this.verifPasswordConf = "La confirmation du mot de passe ne correspond pas";
+  //   } else {
+  //     this.verifPasswordConf = "";
+  //     this.exactPasswordConf = true;
+  //   }
+  // }
+
+  // verifPasswordConFonction() {
+  //   // Logique de vérification du mot de passe pour la connexion
+  //   this.exactPassword = false;
+  //   if(this.password == ""){
+  //     this.verifPassword = "Veuillez renseigner votre mot de passe";
+  //   }
+  //   else if (this.password.length < 5 ){
+  //     this.verifPassword = "Mot de passe doit être supérieur ou égal à 5";
+  //   }
+  //   else{
+  //     this.verifPassword = "";
+  //     this.exactPassword = true;
+  //   }
+  // }
+  verifTelephoneFonction() {
+    // const phonePattern = /^\d{10}$/; // Cette expression régulière suppose que le numéro de téléphone doit avoir exactement 10 chiffres
+    const phonePattern=/^(77|78|76|70|75|33)[0-9]{7}$/;
     if (this.telephone === '') {
       this.verifTelephone = "Veuillez renseigner votre numéro de téléphone";
       this.exactTelephone = false;
@@ -526,7 +638,26 @@ inscription() {
       }
       }
   }
+  deconnexion(): void {
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Êtes-vous sûr de vouloir vous déconnecter ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, se déconnecter',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Suppression des informations de l'utilisateur connecté du localStorage
+        localStorage.removeItem('userData');
 
+        // Redirection vers la page d'accueil ou la page de connexion
+        this.router.navigate(['/accueil']); // Modifiez cette ligne en fonction de votre structure de navigation
+      }
+    });
+  }
 
 
 }

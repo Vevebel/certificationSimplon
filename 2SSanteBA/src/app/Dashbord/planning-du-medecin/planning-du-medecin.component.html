@@ -1,0 +1,82 @@
+<app-sidebar-conttout></app-sidebar-conttout>
+<app-navbar-conttout></app-navbar-conttout>
+<div class="contenu">
+  <main>
+    <div class="container">
+    <h2>Liste des Plannings</h2>
+    <!-- Liste des plannings -->
+    <div class="container">
+      <button type="button" class="btn btnAdd ajout" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Ajout du planning journalier
+      </button>
+    </div>
+    <div>
+      <div>
+        <!-- Affichez les détails de chaque planning ici --
+        <p>Date: {{ planning.date }}</p>
+        <p>Heure de début: {{ planning.heure_debut }}</p>
+        <p>Heure de fin: {{ planning.heure_fin }}</p>
+        <!-- Ajoutez d'autres détails de planning si nécessaire --
+      </div> -->
+      <table class="table mt-5" >
+        <thead>
+          <tr>
+            <!-- <th scope="col">#</th> -->
+            <th scope="col">Date</th>
+            <th scope="col">Heure de début</th>
+            <th scope="col">heure de fin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let planning of plannings">
+            <!-- <th scope="row"></th> -->
+            <td>{{ planning.date }}</td>
+            <td>{{ planning.heure_debut }}</td>
+            <td>{{ planning.heure_fin }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <angular-calendar [events]="plannings"></angular-calendar> -->
+    </div>
+    </div>
+  </div>
+    </main>
+  </div>
+
+<!-- ajour -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajouter un planning</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body ">
+        <div>
+          <!-- <label>Date:</label><br>
+          <input type="date" class="posiInput" name="date"  required> -->
+
+          <!-- <input type="tel" class="posiInput" name="telephone" required><br> -->
+
+        <div  class="contenuModal">
+          <!-- <button (click)="ajouterPlanning()">Ajouter Planning</button> -->
+          <label for="date">Date:</label>
+          <input type="date" id="date" [(ngModel)]="newPlanning.date">
+
+          <label for="heureDebut">Heure de début:</label>
+          <input type="time" id="heureDebut" [(ngModel)]="newPlanning.heure_debut">
+
+          <label for="heureFin"> Heure de fin:</label>
+          <input type="time" id="heureFin" [(ngModel)]="newPlanning.heure_fin">
+        </div>
+        </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="ajouterPlanning()">Ajouter </button>
+        <!-- <button type="button" class="btn btn-primary" (click)="ajout()" data-bs-dismiss="modal">Ajouter</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
