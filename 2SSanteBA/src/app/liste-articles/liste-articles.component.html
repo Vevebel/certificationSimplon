@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class=" contenuListeMedecin">
+  <div class="banier" >
+    <img src="../../assets/baniereArticle.png" alt="" id="banier">
+  </div>
+  <div class="mt-5" >
+    <h1 class="text-center"><u>Liste des articles</u></h1>
+    <div class=" search-container">
+      <input type="text" class="search-input" placeholder="Recherche...">
+      <!-- <button class=""> -->
+        <i class="bi bi-search me-4" style="color: #CE0033;"></i>
+        <!-- <img src="loupe-icon.png" alt="Loupe"> -->
+      <!-- </button> -->
+    </div>
+    <div class="carteArticle">
+      <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let article of articles">
+        <div class="card imgCard" style="width: 18rem;">
+          <img src="http://127.0.0.1:8000/storage/{{ article.image }}" class="card-img-top" alt="..." id="imagecard">
+          <div class="card-body">
+            <h5 class="card-title">{{ article.titre }}</h5>
+            <p class="card-text">{{ article.description }}</p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div>
+ <app-footer></app-footer>
